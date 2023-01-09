@@ -1,22 +1,23 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
+import { IDataTournament } from "../../features/tournaments/tournamentSlice";
 
 interface ICardTournament {
-  id: number;
+  item: IDataTournament;
 }
 
-const CardTournament: FC<ICardTournament> = ({ id }) => {
+const CardTournament: FC<ICardTournament> = ({ item }) => {
   const navigate = useNavigate();
   return (
     <div
       className="flex flex-col flex-auto bg-emerald-400 px-4 py-2 cursor-pointer rounded-md"
-      onClick={() => navigate(`/tournament/${id}`)}
+      onClick={() => navigate(`/tournament/${item.id}`)}
     >
-      <div>турнир № {id}</div>
-      <div>Призовые</div>
-      <div>тип</div>
-      <div>кол-во команд 10/10</div>
-      <div>дата</div>
+      <div>{item.name}</div>
+      <div>{item.prize}</div>
+      <div>{item.typeTournament}</div>
+      <div>{`кол-во команд 1/${item.countTeam}`}</div>
+      <div>{item.dateTournament}</div>
     </div>
   );
 };

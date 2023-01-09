@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
+import teamSlice from "../features/teams/teamSlice";
+import tournamentSlice from "../features/tournaments/tournamentSlice";
 import userSlice from "../features/user/userSlice";
 
 export const store = configureStore({
   reducer: {
     user: userSlice,
+    tournament: tournamentSlice,
+    team: teamSlice,
   },
 });
 

@@ -1,5 +1,6 @@
 import { Form, Formik } from "formik";
 import { FC } from "react";
+import InputComponent from "../../../components/input/input";
 
 const UserEditForm: FC = () => {
   const handleSubmit = (values: any) => {
@@ -22,29 +23,26 @@ const UserEditForm: FC = () => {
         {({ values, handleChange }) => (
           <Form noValidate>
             <div className="flex flex-col">
-              имя:
-              <input
-                className="border-solid border-cyan-400 border-2 mb-2"
+              <InputComponent
+                label="имя"
+                name="name"
                 type="text"
                 value={values.name}
-                onChange={handleChange}
-                name="name"
+                handleChange={handleChange}
               />
-              почта:
-              <input
-                className="border-solid border-cyan-400 border-2 mb-2"
+              <InputComponent
+                label="почта"
+                name="email"
                 type="email"
                 value={values.email}
-                onChange={handleChange}
-                name="email"
+                handleChange={handleChange}
               />
-              пароль:
-              <input
-                className="border-solid border-cyan-400 border-2 mb-2"
+              <InputComponent
+                label="пароль"
+                name="password"
                 type="password"
                 value={values.password}
-                onChange={handleChange}
-                name="password"
+                handleChange={handleChange}
               />
               <button type="submit">Изменить</button>
             </div>

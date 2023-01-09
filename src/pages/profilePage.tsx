@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as AvatarIcon } from "../public/icons/avatar.svg";
 import UserEditForm from "../features/forms/userForms/userEditForm";
@@ -7,7 +7,15 @@ import { useSelector } from "react-redux";
 
 const ProfilePage: FC = () => {
   const navigate = useNavigate();
+  const [userTeam, setUserTeam] = useState<any>([]);
+
   const user = useSelector((state: RootState) => state.user.data);
+  const team = useSelector((state: RootState) => state.team.data);
+
+  useEffect(() => {
+    const arr = team.filter((item) => item.creatorId === user.id);
+    setUserTeam(arr);
+  }, [team, user]);
 
   return (
     <div>
@@ -34,13 +42,20 @@ const ProfilePage: FC = () => {
             рейтинг: <span className="text-orange-500">{user.rating}</span>
           </div>
 
+          {userTeam && (
+            <div>
+              {userTeam.map((item: any) => (
+                <div>{item.name}</div>
+              ))}
+            </div>
+          )}
+
           <div>
-            команда:{" "}
             <span
               className="text-orange-500 cursor-pointer"
               onClick={() => navigate("/team")}
             >
-              Hello Kids
+              создать команду
             </span>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface UserState {
   data: {
     email: string | null;
-    id: string | null;
+    id: string;
     lastLoginAt: string | null;
     logo: null;
     name: null;
@@ -17,7 +17,7 @@ export interface UserState {
 const initialState: UserState = {
   data: {
     email: null,
-    id: null,
+    id: "",
     lastLoginAt: null,
     logo: null,
     name: null,

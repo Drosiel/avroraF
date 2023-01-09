@@ -1,6 +1,7 @@
 import { Form, Formik } from "formik";
 import { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import InputComponent from "../../../components/input/input";
 import { fetchLogin } from "../../../services/auth/auth";
 
 const UserLoginForm: FC = () => {
@@ -33,21 +34,19 @@ const UserLoginForm: FC = () => {
         {({ values, handleChange }) => (
           <Form noValidate>
             <div className="flex flex-col">
-              почта:
-              <input
-                className="border-solid border-cyan-400 border-2 mb-2"
+              <InputComponent
+                label="почта"
+                name="email"
                 type="email"
                 value={values.email}
-                onChange={handleChange}
-                name="email"
+                handleChange={handleChange}
               />
-              пароль:
-              <input
-                className="border-solid border-cyan-400 border-2 mb-2"
+              <InputComponent
+                label="пароль"
+                name="password"
                 type="password"
                 value={values.password}
-                onChange={handleChange}
-                name="password"
+                handleChange={handleChange}
               />
               <button type="submit">Войти</button>
             </div>

@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import CreateTournamentForm from "../features/forms/tournamentForms/createTournamentForm";
 
 const TournamentPage: FC = () => {
-  const { tournamentId } = useParams();
   const navigate = useNavigate();
 
   return (
@@ -17,13 +17,7 @@ const TournamentPage: FC = () => {
       </div>
 
       <div className="flex flex-col gap-2">
-        <div className="text-3xl">турнир № {tournamentId}</div>
-
-        <div>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-        </div>
+        <CreateTournamentForm />
       </div>
     </div>
   );
