@@ -3,9 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface IDataTournament {
   bracket: string | null;
   countTeam: number;
-  dateTournament: string;
+  dateTournamentEnd: string;
+  dateTournamentStart: string;
   id: string;
   image: string | null;
+  maxTeam: number;
   name: string;
   prize: number;
   typeTournament: string;

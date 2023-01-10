@@ -1,18 +1,18 @@
 import { Form, Formik } from "formik";
 import { FC } from "react";
 import InputComponent from "../../../components/input/input";
+import { fetchUserEdit } from "../../../services/user/user";
 
 const UserEditForm: FC = () => {
   const handleSubmit = (values: any) => {
-    console.log("111");
+    fetchUserEdit(values);
   };
+
   return (
     <div>
       <Formik
         initialValues={{
-          name: "",
-          email: "",
-          password: "",
+          name: null,
         }}
         onSubmit={(values: any) => {
           handleSubmit(values);
@@ -28,20 +28,6 @@ const UserEditForm: FC = () => {
                 name="name"
                 type="text"
                 value={values.name}
-                handleChange={handleChange}
-              />
-              <InputComponent
-                label="почта"
-                name="email"
-                type="email"
-                value={values.email}
-                handleChange={handleChange}
-              />
-              <InputComponent
-                label="пароль"
-                name="password"
-                type="password"
-                value={values.password}
                 handleChange={handleChange}
               />
               <button type="submit">Изменить</button>

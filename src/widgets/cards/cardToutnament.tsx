@@ -16,8 +16,12 @@ const CardTournament: FC<ICardTournament> = ({ item }) => {
       <div>{item.name}</div>
       <div>{item.prize}</div>
       <div>{item.typeTournament}</div>
-      <div>{`кол-во команд 1/${item.countTeam}`}</div>
-      <div>{item.dateTournament}</div>
+      <div>{`команд ${item.countTeam}/${item.maxTeam}`}</div>
+      <div>
+        <span>с: {item.dateTournamentStart}</span>
+        {" - "}
+        <span>по: {item.dateTournamentEnd}</span>
+      </div>
     </div>
   );
 };

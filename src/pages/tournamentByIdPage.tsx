@@ -10,9 +10,11 @@ const TournamentByIdPage: FC = () => {
   const [tournamentItem, setTournamentItem] = useState<IDataTournament>({
     bracket: "",
     countTeam: 0,
-    dateTournament: "",
+    dateTournamentEnd: "",
+    dateTournamentStart: "",
     id: "",
     image: "",
+    maxTeam: 0,
     name: "",
     prize: 0,
     typeTournament: "",
@@ -39,9 +41,20 @@ const TournamentByIdPage: FC = () => {
         <div className="text-3xl">{tournamentItem?.name}</div>
 
         <div>
-          <div>{tournamentItem.prize}</div>
-          <div>{tournamentItem.typeTournament}</div>
-          <div>{tournamentItem.dateTournament}</div>
+          <div>призовые: {tournamentItem.prize}</div>
+
+          <div className="flex gap-4">
+            <div>
+              команд: {tournamentItem.countTeam}/{tournamentItem.maxTeam}
+            </div>
+
+            <div>тип: {tournamentItem.typeTournament}</div>
+          </div>
+
+          <div>
+            <span>с: {tournamentItem.dateTournamentStart}</span>-
+            <span>по: {tournamentItem.dateTournamentEnd}</span>
+          </div>
         </div>
       </div>
     </div>

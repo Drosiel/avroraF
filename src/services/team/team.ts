@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { Params } from "react-router-dom";
+import { IUser } from "../../features/user/userSlice";
 import { Axios } from "../axios";
 
 export interface ITeam {
@@ -43,6 +43,26 @@ export const fetchIdTeam = async (id: string) => {
     const { data, status }: AxiosResponse<any> = await Axios.get(`/team/${id}`);
 
     if (status === 200) {
+      return data;
+    }
+  } catch (error) {
+    // console.log(error);
+  }
+};
+
+export const fetchAddUserInTeam = async (
+  user: IUser,
+  id: string | undefined
+) => {
+  const model = { ...user };
+
+  try {
+    const { data, status }: AxiosResponse<any> = await Axios.post(
+      `/team/${id}`,
+      model
+    );
+
+    if (status === 201) {
       return data;
     }
   } catch (error) {

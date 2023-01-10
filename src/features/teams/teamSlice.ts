@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IUser } from "../user/userSlice";
 
 export interface IDataTeam {
   id: string;
@@ -6,7 +7,7 @@ export interface IDataTeam {
   rating: number;
   logo: string;
   creatorId: string;
-  structure: string;
+  members: IUser[] | null;
   stats: string;
 }
 

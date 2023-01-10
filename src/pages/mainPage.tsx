@@ -14,11 +14,13 @@ const MainPage: FC = () => {
         <button onClick={() => navigate("/tournament")}>создать турнир</button>
       </div>
 
-      <div className="grid gap-4 grid-cols-3">
-        {tournament.map((item) => (
-          <CardTournament item={item} />
-        ))}
-      </div>
+      {tournament && (
+        <div className="grid gap-4 grid-cols-3">
+          {tournament.map((item) => (
+            <CardTournament item={item} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

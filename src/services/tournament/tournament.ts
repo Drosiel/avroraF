@@ -3,7 +3,8 @@ import { Axios } from "../axios";
 
 export interface ITournament {
   name: string;
-  dateTournament: Date;
+  dateTournamentStart: Date;
+  dateTournamentEnd: Date;
   countTeam: number;
   prize: number;
   typeTournament: string;

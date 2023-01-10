@@ -8,6 +8,8 @@ import {
 
 const CreateTournamentForm: FC = () => {
   const handleSubmit = (values: ITournament) => {
+    console.log(values);
+
     fetchCreateTournament(values);
   };
 
@@ -16,10 +18,11 @@ const CreateTournamentForm: FC = () => {
       <Formik
         initialValues={{
           name: "",
-          dateTournament: new Date(),
-          countTeam: 0,
+          maxTeam: 0,
           prize: 0,
-          typeTournament: "",
+          dateTournamentStart: new Date(),
+          dateTournamentEnd: new Date(),
+          typeTournament: "5x5",
         }}
         onSubmit={(values: any) => {
           handleSubmit(values);
@@ -38,17 +41,24 @@ const CreateTournamentForm: FC = () => {
                 handleChange={handleChange}
               />
               <InputComponent
-                label="Дата проведения"
-                name="dateTournament"
+                label="Дата начала"
+                name="dateTournamentStart"
                 type="date"
-                value={values.dateTournament}
+                value={values.dateTournamentStart}
+                handleChange={handleChange}
+              />
+              <InputComponent
+                label="Дата конца"
+                name="dateTournamentEnd"
+                type="date"
+                value={values.dateTournamentEnd}
                 handleChange={handleChange}
               />
               <InputComponent
                 label="Количество команд"
-                name="countTeam"
+                name="maxTeam"
                 type="number"
-                value={values.countTeam}
+                value={values.maxTeam}
                 handleChange={handleChange}
               />
               <InputComponent
