@@ -1,11 +1,19 @@
 import { FC, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { IDataTournament } from "../features/tournaments/tournamentSlice";
-import { fetchIdTournament } from "../services/tournament/tournament";
+import { RootState } from "../redux/store";
+import {
+  fetchAddTeamIntournament,
+  fetchIdTournament,
+} from "../services/tournament/tournament";
 
 const TournamentByIdPage: FC = () => {
   const { tournamentId } = useParams();
   const navigate = useNavigate();
+  const team = useSelector((state: RootState) => state.team.data);
+
+  const [value, setValue] = useState<any>(0);
 
   const [tournamentItem, setTournamentItem] = useState<IDataTournament>({
     bracket: "",
@@ -18,7 +26,14 @@ const TournamentByIdPage: FC = () => {
     name: "",
     prize: 0,
     typeTournament: "",
+    teams: [],
   });
+
+  const addTeam = (id: string | undefined) => {
+    fetchAddTeamIntournament(team[value], id).then((data) =>
+      setTournamentItem({ ...tournamentItem, teams: data.teams })
+    );
+  };
 
   useEffect(() => {
     if (tournamentId) {
@@ -45,10 +60,37 @@ const TournamentByIdPage: FC = () => {
 
           <div className="flex gap-4">
             <div>
-              команд: {tournamentItem.countTeam}/{tournamentItem.maxTeam}
+              команд: {tournamentItem.teams?.length}/{tournamentItem.maxTeam}
             </div>
 
             <div>тип: {tournamentItem.typeTournament}</div>
+          </div>
+
+          <div>
+            <select name="select" onChange={(e) => setValue(e.target.value)}>
+              {team.map((item, idx) => (
+                <option value={idx}>{item.name}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <div>
+              <button onClick={() => addTeam(tournamentId)}>
+                ДОБАВИТЬ КОМАНДУ
+              </button>
+            </div>
+
+            <div className="ml-4">
+              {tournamentItem.teams?.map((team) => (
+                <div
+                  className="cursor-pointer"
+                  onClick={() => navigate(`/team/${team.id}`)}
+                >
+                  {team.name}
+                </div>
+              ))}
+            </div>
           </div>
 
           <div>

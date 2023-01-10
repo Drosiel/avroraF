@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ITournament } from "../../services/tournament/tournament";
+import { IDataTournament } from "../tournaments/tournamentSlice";
 import { IUser } from "../user/userSlice";
 
 export interface IDataTeam {
@@ -8,6 +10,7 @@ export interface IDataTeam {
   logo: string;
   creatorId: string;
   members: IUser[] | null;
+  tournaments: IDataTournament[] | null;
   stats: string;
 }
 

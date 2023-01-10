@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IDataTeam } from "../teams/teamSlice";
 
 export interface IDataTournament {
   bracket: string | null;
@@ -11,6 +12,7 @@ export interface IDataTournament {
   name: string;
   prize: number;
   typeTournament: string;
+  teams: IDataTeam[];
 }
 
 export interface TournamentState {

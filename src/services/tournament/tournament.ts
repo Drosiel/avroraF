@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+import { IDataTeam } from "../../features/teams/teamSlice";
 import { Axios } from "../axios";
 
 export interface ITournament {
@@ -47,6 +48,26 @@ export const fetchIdTournament = async (id: string) => {
     );
 
     if (status === 200) {
+      return data;
+    }
+  } catch (error) {
+    // console.log(error);
+  }
+};
+
+export const fetchAddTeamIntournament = async (
+  team: IDataTeam,
+  id: string | undefined
+) => {
+  const model = { ...team };
+
+  try {
+    const { data, status }: AxiosResponse<any> = await Axios.post(
+      `/tournament/${id}`,
+      model
+    );
+
+    if (status === 201) {
       return data;
     }
   } catch (error) {
