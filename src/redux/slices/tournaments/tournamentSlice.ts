@@ -1,22 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IDataTeam } from "../teams/teamSlice";
-
-export interface IDataTournament {
-  bracket: string | null;
-  countTeam: number;
-  dateTournamentEnd: string;
-  dateTournamentStart: string;
-  id: string;
-  image: string | null;
-  maxTeam: number;
-  name: string;
-  prize: number;
-  typeTournament: string;
-  teams: IDataTeam[];
-}
+import { ITournament } from "../../../features/tournament/lib/constant";
 
 export interface TournamentState {
-  data: IDataTournament[];
+  data: ITournament[];
 }
 
 const initialState: TournamentState = {

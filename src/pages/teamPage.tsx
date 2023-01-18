@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import CreateTeamForm from "../features/forms/teamForms/createTeamForm";
+import CreateTeamForm from "../features/team/ui/forms/createTeamForm";
 import { RootState } from "../redux/store";
 
 const TeamPage: FC = () => {
@@ -9,8 +9,10 @@ const TeamPage: FC = () => {
   const team = useSelector((state: RootState) => state.team.data);
 
   return (
-    <div className="flex flex-col gap-6">
-      <CreateTeamForm />
+    <div className="flex flex-col gap-6 items-center py-8">
+      <div className="w-96">
+        <CreateTeamForm />
+      </div>
 
       <ul className="flex flex-col items-center gap-2">
         {team?.map((item) => (

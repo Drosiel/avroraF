@@ -1,10 +1,27 @@
 import { Form, Formik } from "formik";
 import { FC } from "react";
-import InputComponent from "../../../components/input/input";
-import { fetchUserEdit } from "../../../services/user/user";
+import { useSelector } from "react-redux";
+import InputComponent from "../../../../shared/ui/input";
+import { RootState } from "../../../../redux/store";
+import { fetchUserEdit } from "../../../../services/user/user";
+import Button from "../../../../shared/ui/button";
+import { getCookie } from "../../../../services/cookies";
+import { IToken } from "../../../auth/lib/constant";
 
 const UserEditForm: FC = () => {
-  const handleSubmit = (values: any) => {
+  const user = useSelector((state: RootState) => state.user.data);
+
+  const value = `; ${document.cookie}`;
+  const token: any = getCookie("token", value);
+
+  const handleSubmit = (values: {
+    name: string;
+    email: string | null;
+    token: IToken;
+  }) => {
+    values.email = user.email;
+    values.token = token;
+
     fetchUserEdit(values);
   };
 
@@ -13,6 +30,7 @@ const UserEditForm: FC = () => {
       <Formik
         initialValues={{
           name: null,
+          email: null,
         }}
         onSubmit={(values: any) => {
           handleSubmit(values);
@@ -30,7 +48,8 @@ const UserEditForm: FC = () => {
                 value={values.name}
                 handleChange={handleChange}
               />
-              <button type="submit">Изменить</button>
+
+              <Button text="Изменить" type="submit" />
             </div>
           </Form>
         )}

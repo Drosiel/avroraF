@@ -1,7 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { IDataTeam } from "../features/teams/teamSlice";
+import { ITeam } from "../features/team/lib/constant";
+
 import { RootState } from "../redux/store";
 import { fetchAddUserInTeam, fetchIdTeam } from "../services/team/team";
 
@@ -10,7 +11,7 @@ const TeamByIdPage: FC = () => {
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user.data);
 
-  const [value, setValue] = useState<IDataTeam>({
+  const [value, setValue] = useState<ITeam>({
     id: "",
     name: "",
     rating: 0,

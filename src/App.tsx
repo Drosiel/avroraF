@@ -1,9 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Route } from "react-router";
 import { Routes } from "react-router-dom";
-import { addTeamData } from "./features/teams/teamSlice";
-import { addTournamentData } from "./features/tournaments/tournamentSlice";
-import { addUserData } from "./features/user/userSlice";
+import { addTeamData } from "./redux/slices/teams/teamSlice";
 import PublicLayout from "./layouts/public/public";
 import LoginPage from "./pages/loginPage";
 import MainPage from "./pages/mainPage";
@@ -18,6 +16,9 @@ import { getCookie } from "./services/cookies";
 import { fetchAllTeam } from "./services/team/team";
 import { fetchAllTournament } from "./services/tournament/tournament";
 import TeamByIdPage from "./pages/teamByIdPage";
+import { addUserData } from "./redux/slices/user/userSlice";
+import { addTournamentData } from "./redux/slices/tournaments/tournamentSlice";
+import RolePage from "./pages/rolePage";
 
 function App() {
   const value = `; ${document.cookie}`;
@@ -29,22 +30,27 @@ function App() {
   }
 
   useEffect(() => {
-    fetchAllTournament().then((data) => dispatch(addTournamentData(data)));
+    fetchAllTournament(token).then((data) => dispatch(addTournamentData(data)));
     fetchAllTeam().then((data) => dispatch(addTeamData(data)));
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   return (
     <Routes>
       <Route path="/" element={<PublicLayout />}>
         <Route index element={<MainPage />} />
+
         <Route path="/login" element={<LoginPage />} />
+
         <Route path="/tournament" element={<TournamentPage />} />
         <Route
           path="/tournament/:tournamentId"
           element={<TournamentByIdPage />}
         />
+
         <Route path="/team" element={<TeamPage />} />
         <Route path="/team/:teamId" element={<TeamByIdPage />} />
+
+        <Route path="/role" element={<RolePage />} />
       </Route>
 
       <Route path="/profile">

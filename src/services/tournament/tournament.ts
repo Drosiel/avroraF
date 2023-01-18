@@ -1,16 +1,10 @@
 import { AxiosResponse } from "axios";
-import { IDataTeam } from "../../features/teams/teamSlice";
+import { IToken } from "../../features/auth/lib/constant";
+import { ITeam } from "../../features/team/lib/constant";
+import { ITournament } from "../../features/tournament/lib/constant";
 import { Axios } from "../axios";
 
-export interface ITournament {
-  name: string;
-  dateTournamentStart: Date;
-  dateTournamentEnd: Date;
-  countTeam: number;
-  prize: number;
-  typeTournament: string;
-}
-export const fetchAllTournament = async () => {
+export const fetchAllTournament = async (token: IToken) => {
   try {
     const { data, status }: AxiosResponse<any> = await Axios.get(
       "/tournament/findAllTournaments"
@@ -56,7 +50,7 @@ export const fetchIdTournament = async (id: string) => {
 };
 
 export const fetchAddTeamIntournament = async (
-  team: IDataTeam,
+  team: ITeam,
   id: string | undefined
 ) => {
   const model = { ...team };

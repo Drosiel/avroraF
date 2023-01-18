@@ -1,19 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-export interface IUser {
-  email: string | null;
-  id: string;
-  lastLoginAt: string | null;
-  logo: null;
-  name: string | null;
-  password: string | null;
-  rating: number | null;
-  teams: [] | null;
-}
+import { IUser, IRole, ROLE } from "../../../features/user/lib/constant";
 
 export interface UserState {
   data: IUser;
-  value: number;
 }
 
 const initialState: UserState = {
@@ -23,11 +12,10 @@ const initialState: UserState = {
     lastLoginAt: null,
     logo: null,
     name: null,
-    password: null,
     rating: null,
     teams: [],
+    role: { name: null, id: "" },
   },
-  value: 0,
 };
 
 export const userSlice = createSlice({
@@ -39,12 +27,9 @@ export const userSlice = createSlice({
         state.data = action.payload;
       }
     },
-    increment: (state) => {
-      state.value += 1;
-    },
   },
 });
 
-export const { addUserData, increment } = userSlice.actions;
+export const { addUserData } = userSlice.actions;
 
 export default userSlice.reducer;

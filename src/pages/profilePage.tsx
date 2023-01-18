@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as AvatarIcon } from "../public/icons/avatar.svg";
-import UserEditForm from "../features/forms/userForms/userEditForm";
+import UserEditForm from "../features/user/ui/forms/userEditForm";
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
 
@@ -56,6 +56,15 @@ const ProfilePage: FC = () => {
               onClick={() => navigate("/team")}
             >
               создать команду
+            </span>
+          </div>
+
+          <div>
+            <span
+              className="text-orange-500 cursor-pointer"
+              onClick={() => navigate("/role")}
+            >
+              создать роль
             </span>
           </div>
         </div>

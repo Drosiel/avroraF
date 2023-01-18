@@ -1,11 +1,7 @@
 import { AxiosResponse } from "axios";
-import { IUser } from "../../features/user/userSlice";
+import { ITeam } from "../../features/team/lib/constant";
+import { IUser } from "../../features/user/lib/constant";
 import { Axios } from "../axios";
-
-export interface ITeam {
-  name: string;
-  creatorId: string;
-}
 
 export const fetchAllTeam = async () => {
   try {

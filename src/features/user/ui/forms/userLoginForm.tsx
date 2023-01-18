@@ -1,12 +1,24 @@
 import { Form, Formik } from "formik";
-import { FC } from "react";
-import InputComponent from "../../../components/input/input";
-import { fetchRegistration } from "../../../services/auth/auth";
+import { FC, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import InputComponent from "../../../../shared/ui/input";
+import { fetchLogin } from "../../../../services/auth/auth";
+import Button from "../../../../shared/ui/button";
 
-const UserRegistrationForm: FC = () => {
+const UserLoginForm: FC = () => {
+  const navigate = useNavigate();
+  const [value, setValue] = useState(null);
+
   const handleSubmit = (values: any) => {
-    fetchRegistration(values);
+    fetchLogin(values).then((data) => setValue(data));
   };
+
+  useEffect(() => {
+    if (value) {
+      navigate("/");
+    }
+  }, [value, navigate]);
+
   return (
     <div>
       <Formik
@@ -37,7 +49,8 @@ const UserRegistrationForm: FC = () => {
                 value={values.password}
                 handleChange={handleChange}
               />
-              <button type="submit">Зарегистрироваться</button>
+
+              <Button text="Войти" type="submit" />
             </div>
           </Form>
         )}
@@ -46,4 +59,4 @@ const UserRegistrationForm: FC = () => {
   );
 };
 
-export default UserRegistrationForm;
+export default UserLoginForm;

@@ -1,12 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { IDataTournament } from "../features/tournaments/tournamentSlice";
+import { ITournament } from "../features/tournament/lib/constant";
 import { RootState } from "../redux/store";
 import {
   fetchAddTeamIntournament,
   fetchIdTournament,
 } from "../services/tournament/tournament";
+import Select from "../shared/ui/select";
 
 const TournamentByIdPage: FC = () => {
   const { tournamentId } = useParams();
@@ -15,7 +16,7 @@ const TournamentByIdPage: FC = () => {
 
   const [value, setValue] = useState<any>(0);
 
-  const [tournamentItem, setTournamentItem] = useState<IDataTournament>({
+  const [tournamentItem, setTournamentItem] = useState<ITournament>({
     bracket: "",
     countTeam: 0,
     dateTournamentEnd: "",
@@ -67,14 +68,12 @@ const TournamentByIdPage: FC = () => {
           </div>
 
           <div>
-            <select name="select" onChange={(e) => setValue(e.target.value)}>
-              {team.map((item, idx) => (
-                <option value={idx}>{item.name}</option>
-              ))}
-            </select>
-          </div>
+            <Select
+              options={team}
+              name="team"
+              onChange={(e) => setValue(e.target.value)}
+            />
 
-          <div>
             <div>
               <button onClick={() => addTeam(tournamentId)}>
                 ДОБАВИТЬ КОМАНДУ

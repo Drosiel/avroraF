@@ -1,15 +1,12 @@
 import { Form, Formik } from "formik";
 import { FC } from "react";
-import InputComponent from "../../../components/input/input";
-import {
-  fetchCreateTournament,
-  ITournament,
-} from "../../../services/tournament/tournament";
+import InputComponent from "../../../../shared/ui/input";
+import { fetchCreateTournament } from "../../../../services/tournament/tournament";
+import { ITournament } from "../../lib/constant";
+import Button from "../../../../shared/ui/button";
 
 const CreateTournamentForm: FC = () => {
   const handleSubmit = (values: ITournament) => {
-    console.log(values);
-
     fetchCreateTournament(values);
   };
 
@@ -76,7 +73,7 @@ const CreateTournamentForm: FC = () => {
                 handleChange={handleChange}
               />
 
-              <button type="submit">Создать турнир</button>
+              <Button text="Создать турнир" type="submit" />
             </div>
           </Form>
         )}

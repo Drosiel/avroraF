@@ -1,10 +1,7 @@
 import { AxiosResponse } from "axios";
+import { IToken } from "../../features/auth/lib/constant";
 import { Axios } from "../axios";
 import { setCookie } from "../cookies";
-
-export interface IToken {
-  token: any;
-}
 
 export const fetchRegistration = async ({ password, email }: any) => {
   const model = {
