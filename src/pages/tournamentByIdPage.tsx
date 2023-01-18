@@ -1,8 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import CreateCommentForm from "../features/comment/ui/forms/createCommentForm";
 import { ITournament } from "../features/tournament/lib/constant";
+
 import { RootState } from "../redux/store";
+
 import {
   fetchAddTeamIntournament,
   fetchIdTournament,
@@ -28,6 +31,7 @@ const TournamentByIdPage: FC = () => {
     prize: 0,
     typeTournament: "",
     teams: [],
+    comments: [],
   });
 
   const addTeam = (id: string | undefined) => {
@@ -97,6 +101,20 @@ const TournamentByIdPage: FC = () => {
             <span>по: {tournamentItem.dateTournamentEnd}</span>
           </div>
         </div>
+      </div>
+
+      <div>
+        <ul className="grid gap-2">
+          {tournamentItem.comments.map((comment) => (
+            <li className="bg-red-400">
+              <div>{comment.user.name || "Пользователь"}</div>
+              <div>{comment.text}</div>
+              <div>{comment.date}</div>
+            </li>
+          ))}
+        </ul>
+
+        <CreateCommentForm tournamentId={tournamentItem?.id} />
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { IComment } from "../../comment/lib/constant";
 import { ITeam } from "../../team/lib/constant";
 
 export interface ITournament {
@@ -12,4 +13,5 @@ export interface ITournament {
   prize: number;
   typeTournament: string;
   teams: ITeam[];
+  comments: IComment[];
 }

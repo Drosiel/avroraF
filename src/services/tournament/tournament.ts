@@ -3,6 +3,10 @@ import { IToken } from "../../features/auth/lib/constant";
 import { ITeam } from "../../features/team/lib/constant";
 import { ITournament } from "../../features/tournament/lib/constant";
 import { Axios } from "../axios";
+import { getCookie } from "../cookies";
+
+const cookie = `; ${document.cookie}`;
+const token: any = getCookie("token", cookie);
 
 export const fetchAllTournament = async (token: IToken) => {
   try {
@@ -24,7 +28,12 @@ export const fetchCreateTournament = async (data: ITournament) => {
   try {
     const { data, status }: AxiosResponse<any> = await Axios.post(
       "/tournament/create",
-      model
+      model,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
 
     if (status === 201) {
@@ -58,7 +67,12 @@ export const fetchAddTeamIntournament = async (
   try {
     const { data, status }: AxiosResponse<any> = await Axios.post(
       `/tournament/${id}`,
-      model
+      model,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
 
     if (status === 201) {

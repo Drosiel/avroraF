@@ -14,7 +14,7 @@ const initialState: UserState = {
     name: null,
     rating: null,
     teams: [],
-    role: { name: null, id: "" },
+    roles: [],
   },
 };
 

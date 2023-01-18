@@ -5,8 +5,8 @@ export interface IUser {
   logo: null;
   name: string | null;
   rating: number | null;
-  teams: [] | null;
-  role: IRole;
+  teams?: [] | null;
+  roles?: IRole[];
 }
 
 export enum ROLE {
@@ -17,6 +17,6 @@ export enum ROLE {
 }
 
 export interface IRole {
-  name: ROLE | null;
+  name: ROLE;
   id: string;
 }
