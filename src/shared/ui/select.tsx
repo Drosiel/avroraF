@@ -2,12 +2,13 @@ import { FC } from "react";
 
 interface ISelect {
   name: string;
-
   options: any;
   onChange?: (value: any) => any;
 }
 
 const Select: FC<ISelect> = ({ name, options, onChange }) => {
+  console.log(options);
+
   return (
     <select
       className="bg-orange-500 py-2 px-4 rounded"

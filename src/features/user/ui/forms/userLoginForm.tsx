@@ -4,20 +4,17 @@ import { useNavigate } from "react-router-dom";
 import InputComponent from "../../../../shared/ui/input";
 import { fetchLogin } from "../../../../services/auth/auth";
 import Button from "../../../../shared/ui/button";
+import { useDispatch } from "react-redux";
+import { addUserData } from "../../../../redux/slices/user/userSlice";
 
 const UserLoginForm: FC = () => {
   const navigate = useNavigate();
-  const [value, setValue] = useState(null);
+  const dispatch = useDispatch();
 
   const handleSubmit = (values: any) => {
-    fetchLogin(values).then((data) => setValue(data));
+    fetchLogin(values).then((data) => dispatch(addUserData(data)));
+    navigate("/");
   };
-
-  useEffect(() => {
-    if (value) {
-      navigate("/");
-    }
-  }, [value, navigate]);
 
   return (
     <div>

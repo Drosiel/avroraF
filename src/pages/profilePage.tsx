@@ -1,21 +1,22 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as AvatarIcon } from "../public/icons/avatar.svg";
 import UserEditForm from "../features/user/ui/forms/userEditForm";
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
+import { ITeam } from "../features/team/lib/constant";
+import { fetchRemoveTeam } from "../services/team/team";
+import { ROLE } from "../features/user/lib/constant";
+import Button from "../shared/ui/button";
 
 const ProfilePage: FC = () => {
   const navigate = useNavigate();
-  const [userTeam, setUserTeam] = useState<any>([]);
 
   const user = useSelector((state: RootState) => state.user.data);
-  const team = useSelector((state: RootState) => state.team.data);
 
-  useEffect(() => {
-    const arr = team.filter((item) => item.creatorId === user.id);
-    setUserTeam(arr);
-  }, [team, user]);
+  const deleteTeam = (id: string) => {
+    fetchRemoveTeam(user.id, id);
+  };
 
   return (
     <div>
@@ -33,39 +34,76 @@ const ProfilePage: FC = () => {
           </div>
 
           <div className="w-80">
+            <div>{user.name}</div>
             <UserEditForm />
           </div>
         </div>
 
         <div className="flex flex-col gap-4">
           <div>
-            рейтинг: <span className="text-orange-500">{user.rating}</span>
+            Рейтинг: <span className="text-orange-500">{user.rating}</span>
           </div>
 
-          {userTeam && (
-            <div>
-              {userTeam.map((item: any) => (
-                <div>{item.name}</div>
-              ))}
+          <div className="grid grid-cols-2 gap-2">
+            <div className="bg-slate-500 p-2">
+              <div>
+                <span>Команды в которых я играю:</span>
+              </div>
+
+              <ul className="grid gap-4 p-2">
+                {user.teams.map((item: any) => (
+                  <li
+                    className="flex gap-2 bg-green-300 p-2 cursor-pointer hover:bg-green-200"
+                    onClick={() => navigate(`/team/${item.id}`)}
+                  >
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
             </div>
-          )}
 
-          <div>
-            <span
-              className="text-orange-500 cursor-pointer"
-              onClick={() => navigate("/team")}
-            >
-              создать команду
-            </span>
+            <div className="bg-slate-500 p-2">
+              <div>
+                <span>Созданные мной команды:</span>
+              </div>
+
+              <ul className="grid gap-4 p-2">
+                {user.teamsCreator.map((item: ITeam) => (
+                  <li className="flex">
+                    <div
+                      className="flex gap-2 bg-green-300 p-2 cursor-pointer hover:bg-green-200 flex-1"
+                      onClick={() => navigate(`/team/${item.id}`)}
+                    >
+                      {item.name}
+                    </div>
+
+                    <div className="h-full">
+                      <button
+                        className="bg-red-600 text-orange-50 px-2 h-full"
+                        onClick={() => deleteTeam(item.id)}
+                      >
+                        Удалить команду
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          <div>
-            <span
-              className="text-orange-500 cursor-pointer"
-              onClick={() => navigate("/role")}
-            >
-              создать роль
-            </span>
+          <div className="flex gap-2">
+            <div>
+              <Button
+                text="СОЗДАТЬ КОМАНДУ"
+                onClick={() => navigate("/team")}
+              />
+            </div>
+
+            {user.roles?.some((role) => role.name === ROLE.ADMIN) && (
+              <div>
+                <Button text="СОЗДАТЬ РОЛЬ" onClick={() => navigate("/role")} />
+              </div>
+            )}
           </div>
         </div>
       </div>

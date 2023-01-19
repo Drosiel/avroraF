@@ -55,6 +55,7 @@ export const fetchIdTeam = async (id: string) => {
   }
 };
 
+//добавить игрока в команду
 export const fetchAddUserInTeam = async (
   user: IUser,
   id: string | undefined
@@ -64,7 +65,35 @@ export const fetchAddUserInTeam = async (
   try {
     const { data, status }: AxiosResponse<any> = await Axios.post(
       `/team/${id}`,
-      model
+      model,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (status === 201) {
+      return data;
+    }
+  } catch (error) {
+    // console.log(error);
+  }
+};
+
+//удалить команду
+export const fetchRemoveTeam = async (userId: string, id: string) => {
+  const model = { userId, id };
+
+  try {
+    const { data, status }: AxiosResponse<any> = await Axios.post(
+      `/team/delete`,
+      model,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
 
     if (status === 201) {

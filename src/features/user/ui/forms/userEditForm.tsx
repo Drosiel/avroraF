@@ -1,15 +1,17 @@
 import { Form, Formik } from "formik";
 import { FC } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import InputComponent from "../../../../shared/ui/input";
 import { RootState } from "../../../../redux/store";
 import { fetchUserEdit } from "../../../../services/user/user";
 import Button from "../../../../shared/ui/button";
 import { getCookie } from "../../../../services/cookies";
 import { IToken } from "../../../auth/lib/constant";
+import { addUserData } from "../../../../redux/slices/user/userSlice";
 
 const UserEditForm: FC = () => {
   const user = useSelector((state: RootState) => state.user.data);
+  const dispatch = useDispatch();
 
   const value = `; ${document.cookie}`;
   const token: any = getCookie("token", value);
@@ -22,7 +24,7 @@ const UserEditForm: FC = () => {
     values.email = user.email;
     values.token = token;
 
-    fetchUserEdit(values);
+    fetchUserEdit(values).then((data) => dispatch(addUserData(data)));
   };
 
   return (

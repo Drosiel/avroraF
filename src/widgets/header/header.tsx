@@ -1,18 +1,15 @@
-import { FC, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../redux/slices/user/userSlice";
 import { RootState } from "../../redux/store";
-import Select from "../../shared/ui/select";
+import { deleteCookie } from "../../services/cookies";
 
 const Header: FC = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const user = useSelector((state: RootState) => state.user.data);
-
-  const [value, setValue] = useState(null);
-
-  console.log(value);
-
-  const arr = [{ name: "мой профиль" }, { name: "Мои команды" }];
 
   return (
     <div className="flex h-12 px-4 items-center bg-red-400">
@@ -34,19 +31,13 @@ const Header: FC = () => {
       </div>
 
       <div className="flex gap-4 ml-auto text-base cursor-pointer">
-        {/* {user.email && (
-          <Select
-            options={arr}
-            name="team"
-            onChange={(e) => setValue(e.target.value)}
-          />
-        )} */}
-
         {user.email && (
           <div onClick={() => navigate("/profile")}>
-            {user?.name || user?.email}
+            {user?.name || "Пользователь"}
           </div>
         )}
+
+        {user.email && <div onClick={() => dispatch(logout())}>выйти</div>}
 
         {!user.email && <div onClick={() => navigate("/login")}>Войти</div>}
       </div>

@@ -16,7 +16,9 @@ export const fetchUserEdit = async ({ name, email, token }: any) => {
         },
       }
     );
-    if (status === 201) {
+    if (status === 200) {
+      console.log("data", data);
+
       return data;
     }
   } catch (error) {

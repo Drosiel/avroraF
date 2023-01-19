@@ -7,7 +7,7 @@ import { ITournament } from "../features/tournament/lib/constant";
 import { RootState } from "../redux/store";
 
 import {
-  fetchAddTeamIntournament,
+  fetchAddTeamInTournament,
   fetchIdTournament,
 } from "../services/tournament/tournament";
 import Select from "../shared/ui/select";
@@ -15,7 +15,7 @@ import Select from "../shared/ui/select";
 const TournamentByIdPage: FC = () => {
   const { tournamentId } = useParams();
   const navigate = useNavigate();
-  const team = useSelector((state: RootState) => state.team.data);
+  const user = useSelector((state: RootState) => state.user.data);
 
   const [value, setValue] = useState<any>(0);
 
@@ -35,7 +35,7 @@ const TournamentByIdPage: FC = () => {
   });
 
   const addTeam = (id: string | undefined) => {
-    fetchAddTeamIntournament(team[value], id).then((data) =>
+    fetchAddTeamInTournament(user.teams[value], id).then((data) =>
       setTournamentItem({ ...tournamentItem, teams: data.teams })
     );
   };
@@ -72,17 +72,21 @@ const TournamentByIdPage: FC = () => {
           </div>
 
           <div>
-            <Select
-              options={team}
-              name="team"
-              onChange={(e) => setValue(e.target.value)}
-            />
+            {user.teams.length > 0 && (
+              <>
+                <Select
+                  options={user.teams}
+                  name="team"
+                  onChange={(e) => setValue(e.target.value)}
+                />
 
-            <div>
-              <button onClick={() => addTeam(tournamentId)}>
-                ДОБАВИТЬ КОМАНДУ
-              </button>
-            </div>
+                <div>
+                  <button onClick={() => addTeam(tournamentId)}>
+                    ДОБАВИТЬ КОМАНДУ
+                  </button>
+                </div>
+              </>
+            )}
 
             <div className="ml-4">
               {tournamentItem.teams?.map((team) => (
@@ -104,17 +108,21 @@ const TournamentByIdPage: FC = () => {
       </div>
 
       <div>
-        <ul className="grid gap-2">
-          {tournamentItem.comments.map((comment) => (
-            <li className="bg-red-400">
-              <div>{comment.user.name || "Пользователь"}</div>
-              <div>{comment.text}</div>
-              <div>{comment.date}</div>
-            </li>
-          ))}
-        </ul>
+        <div className="grid max-w-lg gap-4 mx-auto">
+          <div className="bg-orange-200 p-1">
+            <CreateCommentForm tournamentId={tournamentItem?.id} />
+          </div>
 
-        <CreateCommentForm tournamentId={tournamentItem?.id} />
+          <ul className="grid gap-2">
+            {tournamentItem.comments.map((comment) => (
+              <li className="bg-red-400 px-2 py-1 rounded">
+                <div>{comment.user.name || "Пользователь"}</div>
+                <div>{comment.text}</div>
+                <div>{comment.date}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

@@ -1,12 +1,14 @@
+import { ITeam } from "../../team/lib/constant";
+
 export interface IUser {
   email: string | null;
   id: string;
-  lastLoginAt: string | null;
   logo: null;
   name: string | null;
   rating: number | null;
-  teams?: [] | null;
-  roles?: IRole[];
+  roles: IRole[];
+  teams: ITeam[];
+  teamsCreator: ITeam[];
 }
 
 export enum ROLE {

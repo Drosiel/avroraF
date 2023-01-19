@@ -16,6 +16,15 @@ export const teamSlice = createSlice({
     addTeamData: (state, action) => {
       state.data = action.payload;
     },
+    deleteTeam: (state, action) => {
+      const { id } = action.payload;
+
+      state.data.splice(
+        0,
+        state.data.length,
+        ...state.data.filter((team) => team.id !== id)
+      );
+    },
   },
 });
 

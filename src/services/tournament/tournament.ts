@@ -58,7 +58,7 @@ export const fetchIdTournament = async (id: string) => {
   }
 };
 
-export const fetchAddTeamIntournament = async (
+export const fetchAddTeamInTournament = async (
   team: ITeam,
   id: string | undefined
 ) => {
@@ -67,6 +67,29 @@ export const fetchAddTeamIntournament = async (
   try {
     const { data, status }: AxiosResponse<any> = await Axios.post(
       `/tournament/${id}`,
+      model,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (status === 201) {
+      return data;
+    }
+  } catch (error) {
+    // console.log(error);
+  }
+};
+
+//удалить турнир
+export const fetchRemoveTournament = async (id: string) => {
+  const model = { id };
+
+  try {
+    const { data, status }: AxiosResponse<any> = await Axios.post(
+      `/tournament/delete`,
       model,
       {
         headers: {
