@@ -16,9 +16,7 @@ export const fetchAllTeam = async () => {
     if (status === 200) {
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const fetchCreateTeam = async ({ name, creatorId }: ITeam) => {
@@ -38,9 +36,7 @@ export const fetchCreateTeam = async ({ name, creatorId }: ITeam) => {
     if (status === 201) {
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const fetchIdTeam = async (id: string) => {
@@ -50,9 +46,7 @@ export const fetchIdTeam = async (id: string) => {
     if (status === 200) {
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };
 
 //добавить игрока в команду
@@ -76,9 +70,7 @@ export const fetchAddUserInTeam = async (
     if (status === 201) {
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };
 
 //удалить команду
@@ -99,7 +91,5 @@ export const fetchRemoveTeam = async (userId: string, id: string) => {
     if (status === 201) {
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };

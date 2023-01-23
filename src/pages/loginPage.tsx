@@ -12,7 +12,7 @@ const LoginPage: FC = () => {
         <div>{value ? <UserRegistrationForm /> : <UserLoginForm />}</div>
 
         <Button
-          isSecondary
+          typeButton="secondary"
           text={value ? "Войти" : "Регистрация"}
           onClick={() => setValue(!value)}
         />

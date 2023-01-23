@@ -26,7 +26,5 @@ export const fetchCreateComment = async ({
     if (status === 201) {
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };

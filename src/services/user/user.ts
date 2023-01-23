@@ -3,8 +3,20 @@ import { IRole } from "../../features/user/lib/constant";
 
 import { Axios } from "../axios";
 
-export const fetchUserEdit = async ({ name, email, token }: any) => {
-  const model = { name, email };
+export const fetchAllUsers = async () => {
+  try {
+    const { data, status }: AxiosResponse<any> = await Axios.get(
+      "/user/findAll"
+    );
+
+    if (status === 200) {
+      return data;
+    }
+  } catch (error) {}
+};
+
+export const fetchUserEdit = async ({ name, id, token }: any) => {
+  const model = { name, id };
 
   try {
     const { data, status }: AxiosResponse<any> = await Axios.put(
@@ -17,13 +29,9 @@ export const fetchUserEdit = async ({ name, email, token }: any) => {
       }
     );
     if (status === 200) {
-      console.log("data", data);
-
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const fetchCreateRole = async ({ name }: IRole) => {
@@ -38,7 +46,15 @@ export const fetchCreateRole = async ({ name }: IRole) => {
     if (status === 201) {
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
+};
+
+export const fetchIdUser = async (id: string) => {
+  try {
+    const { data, status }: AxiosResponse<any> = await Axios.get(`user/${id}`);
+
+    if (status === 200) {
+      return data;
+    }
+  } catch (error) {}
 };

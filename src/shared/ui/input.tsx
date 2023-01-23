@@ -20,7 +20,7 @@ const InputComponent: FC<IInputComponent> = ({
       <span className="text-lg text-red-400">{label}</span>
 
       <input
-        className="border-solid border-red-400 border-2 mb-2 px-3 py-2 rounded-md"
+        className="border-solid border-red-400 border-2 px-3 py-2 rounded-md"
         type={type}
         value={value}
         onChange={handleChange}

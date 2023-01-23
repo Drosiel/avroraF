@@ -17,9 +17,7 @@ export const fetchAllTournament = async (token: IToken) => {
     if (status === 200) {
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const fetchCreateTournament = async (data: ITournament) => {
@@ -39,9 +37,7 @@ export const fetchCreateTournament = async (data: ITournament) => {
     if (status === 201) {
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const fetchIdTournament = async (id: string) => {
@@ -53,9 +49,7 @@ export const fetchIdTournament = async (id: string) => {
     if (status === 200) {
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const fetchAddTeamInTournament = async (
@@ -78,9 +72,7 @@ export const fetchAddTeamInTournament = async (
     if (status === 201) {
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };
 
 //удалить турнир
@@ -101,7 +93,5 @@ export const fetchRemoveTournament = async (id: string) => {
     if (status === 201) {
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };

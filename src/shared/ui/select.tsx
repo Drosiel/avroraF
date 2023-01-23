@@ -7,11 +7,9 @@ interface ISelect {
 }
 
 const Select: FC<ISelect> = ({ name, options, onChange }) => {
-  console.log(options);
-
   return (
     <select
-      className="bg-orange-500 py-2 px-4 rounded"
+      className="bg-orange-500 py-2 px-4 rounded w-full"
       name={name}
       onChange={onChange}
     >

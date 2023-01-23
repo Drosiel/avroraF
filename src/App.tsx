@@ -5,7 +5,7 @@ import { addTeamData } from "./redux/slices/teams/teamSlice";
 import PublicLayout from "./layouts/public/public";
 import LoginPage from "./pages/loginPage";
 import MainPage from "./pages/mainPage";
-import ProfilePage from "./pages/profilePage";
+import ProfilePage from "./pages/profilePage/ui/profilePage";
 import TeamPage from "./pages/teamPage";
 import TournamentByIdPage from "./pages/tournamentByIdPage";
 import TournamentPage from "./pages/tournamentPage";
@@ -19,6 +19,7 @@ import TeamByIdPage from "./pages/teamByIdPage";
 import { addUserData } from "./redux/slices/user/userSlice";
 import { addTournamentData } from "./redux/slices/tournaments/tournamentSlice";
 import RolePage from "./pages/rolePage";
+import UserPage from "./pages/userPage";
 
 function App() {
   const value = `; ${document.cookie}`;
@@ -46,6 +47,8 @@ function App() {
           path="/tournament/:tournamentId"
           element={<TournamentByIdPage />}
         />
+
+        <Route path="/:userId" element={<UserPage />} />
 
         <Route path="/team" element={<TeamPage />} />
         <Route path="/team/:teamId" element={<TeamByIdPage />} />

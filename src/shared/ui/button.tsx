@@ -2,24 +2,39 @@ import { FC } from "react";
 
 interface IButton {
   text: string;
-  isSecondary?: boolean;
+  typeButton?: "ok" | "secondary" | "primary" | "cancel";
   type?: "button" | "submit" | "reset" | undefined;
   onClick?: (value: any) => any;
 }
 
 const Button: FC<IButton> = ({
   text,
-  isSecondary = false,
+  typeButton = "primary",
   type = "button",
   onClick,
 }) => {
+  const setTypeButton = () => {
+    switch (typeButton) {
+      case "ok":
+        return "bg-green-400";
+
+      case "secondary":
+        return "bg-blue-400";
+
+      case "primary":
+        return "bg-orange-400";
+
+      case "cancel":
+        return "bg-red-400";
+
+      default:
+        return "bg-grey-400";
+    }
+  };
+
   return (
     <button
-      className={`rounded px-2 py-2 ${
-        isSecondary
-          ? "bg-teal-600 hover:bg-teal-400"
-          : "bg-orange-600 hover:bg-orange-400"
-      }`}
+      className={`rounded px-2 py-2 ${setTypeButton()}`}
       type={type}
       onClick={onClick}
     >

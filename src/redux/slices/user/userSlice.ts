@@ -8,7 +8,6 @@ export interface UserState {
 
 const initialState: UserState = {
   data: {
-    email: null,
     id: "",
     logo: null,
     name: null,
@@ -16,6 +15,7 @@ const initialState: UserState = {
     roles: [],
     teams: [],
     teamsCreator: [],
+    notifications: [],
   },
 };
 
@@ -24,8 +24,6 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     addUserData: (state, action) => {
-      console.log(action.payload);
-
       if (action.payload) {
         state.data = { ...action.payload };
       }

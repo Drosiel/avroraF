@@ -1,18 +1,22 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as AvatarIcon } from "../public/icons/avatar.svg";
-import UserEditForm from "../features/user/ui/forms/userEditForm";
-import { RootState } from "../redux/store";
+import { ReactComponent as AvatarIcon } from "../../..//public/icons/avatar.svg";
+import UserEditForm from "../../../features/user/ui/forms/userEditForm";
+import { RootState } from "../../../redux/store";
 import { useSelector } from "react-redux";
-import { ITeam } from "../features/team/lib/constant";
-import { fetchRemoveTeam } from "../services/team/team";
-import { ROLE } from "../features/user/lib/constant";
-import Button from "../shared/ui/button";
+import { ITeam } from "../../../features/team/lib/constant";
+import { fetchRemoveTeam } from "../../../services/team/team";
+import { ROLE } from "../../../features/user/lib/constant";
+import Button from "../../../shared/ui/button";
+import Modal from "../../../widgets/modal/modal";
+import CreateTeamForm from "../../../features/team/ui/forms/createTeamForm";
+import NotificationProfile from "./notificationProfile/notificationProfile";
 
 const ProfilePage: FC = () => {
   const navigate = useNavigate();
-
   const user = useSelector((state: RootState) => state.user.data);
+
+  const [open, setOpen] = useState(false);
 
   const deleteTeam = (id: string) => {
     fetchRemoveTeam(user.id, id);
@@ -34,7 +38,7 @@ const ProfilePage: FC = () => {
           </div>
 
           <div className="w-80">
-            <div>{user.name}</div>
+            <div>{user?.name}</div>
             <UserEditForm />
           </div>
         </div>
@@ -91,12 +95,13 @@ const ProfilePage: FC = () => {
             </div>
           </div>
 
+          <div>
+            <NotificationProfile />
+          </div>
+
           <div className="flex gap-2">
             <div>
-              <Button
-                text="СОЗДАТЬ КОМАНДУ"
-                onClick={() => navigate("/team")}
-              />
+              <Button text="СОЗДАТЬ КОМАНДУ" onClick={() => setOpen(true)} />
             </div>
 
             {user.roles?.some((role) => role.name === ROLE.ADMIN) && (
@@ -107,6 +112,12 @@ const ProfilePage: FC = () => {
           </div>
         </div>
       </div>
+
+      {open && (
+        <Modal textHeader="Создание команды" open={open} onClose={setOpen}>
+          <CreateTeamForm />
+        </Modal>
+      )}
     </div>
   );
 };

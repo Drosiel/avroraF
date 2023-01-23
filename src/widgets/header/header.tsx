@@ -31,15 +31,15 @@ const Header: FC = () => {
       </div>
 
       <div className="flex gap-4 ml-auto text-base cursor-pointer">
-        {user.email && (
+        {user.name && (
           <div onClick={() => navigate("/profile")}>
-            {user?.name || "Пользователь"}
+            {user.name || "Пользователь"}
           </div>
         )}
 
-        {user.email && <div onClick={() => dispatch(logout())}>выйти</div>}
+        {user.name && <div onClick={() => dispatch(logout())}>выйти</div>}
 
-        {!user.email && <div onClick={() => navigate("/login")}>Войти</div>}
+        {!user.name && <div onClick={() => navigate("/login")}>Войти</div>}
       </div>
     </div>
   );

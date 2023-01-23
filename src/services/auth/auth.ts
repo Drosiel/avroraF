@@ -3,10 +3,11 @@ import { IToken } from "../../features/auth/lib/constant";
 import { Axios } from "../axios";
 import { setCookie } from "../cookies";
 
-export const fetchRegistration = async ({ password, email }: any) => {
+export const fetchRegistration = async ({ password, email, name }: any) => {
   const model = {
     password,
     email,
+    name,
   };
 
   try {
@@ -18,9 +19,7 @@ export const fetchRegistration = async ({ password, email }: any) => {
     if (status === 201) {
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const fetchLogin = async ({ email, password }: any) => {
@@ -43,9 +42,7 @@ export const fetchLogin = async ({ email, password }: any) => {
       });
       return fetchIsValidToken(data);
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const fetchIsValidToken = async (token: IToken) => {
@@ -62,7 +59,5 @@ export const fetchIsValidToken = async (token: IToken) => {
     if (status === 200) {
       return data;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };

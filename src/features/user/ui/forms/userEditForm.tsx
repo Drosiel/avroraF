@@ -18,10 +18,10 @@ const UserEditForm: FC = () => {
 
   const handleSubmit = (values: {
     name: string;
-    email: string | null;
+    id: string | null;
     token: IToken;
   }) => {
-    values.email = user.email;
+    values.id = user.id;
     values.token = token;
 
     fetchUserEdit(values).then((data) => dispatch(addUserData(data)));
@@ -32,7 +32,6 @@ const UserEditForm: FC = () => {
       <Formik
         initialValues={{
           name: null,
-          email: null,
         }}
         onSubmit={(values: any) => {
           handleSubmit(values);

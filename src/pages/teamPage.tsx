@@ -11,7 +11,7 @@ const TeamPage: FC = () => {
 
   return (
     <div className="flex flex-col gap-6 items-center py-8">
-      {user.email && (
+      {user.name && (
         <div className="w-96">
           <CreateTeamForm />
         </div>

@@ -14,6 +14,7 @@ const UserRegistrationForm: FC = () => {
         initialValues={{
           email: "",
           password: "",
+          name: "",
         }}
         onSubmit={(values: any) => {
           handleSubmit(values);
@@ -31,6 +32,15 @@ const UserRegistrationForm: FC = () => {
                 value={values.email}
                 handleChange={handleChange}
               />
+
+              <InputComponent
+                label="Имя"
+                name="name"
+                type="text"
+                value={values.name}
+                handleChange={handleChange}
+              />
+
               <InputComponent
                 label="пароль"
                 name="password"

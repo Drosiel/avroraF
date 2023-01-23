@@ -5,7 +5,7 @@ import { ITeam } from "../features/team/lib/constant";
 import { ReactComponent as AvatarIcon } from "../public/icons/avatar.svg";
 
 import { RootState } from "../redux/store";
-import { fetchAddUserInTeam, fetchIdTeam } from "../services/team/team";
+import { fetchIdTeam } from "../services/team/team";
 
 const TeamByIdPage: FC = () => {
   const { teamId } = useParams();
@@ -22,12 +22,6 @@ const TeamByIdPage: FC = () => {
     tournaments: [],
     stats: "",
   });
-
-  const addUser = (id: string | undefined) => {
-    fetchAddUserInTeam(user, id).then((data) =>
-      setValue({ ...value, members: data.members })
-    );
-  };
 
   useEffect(() => {
     if (teamId) {
@@ -49,19 +43,18 @@ const TeamByIdPage: FC = () => {
         </div>
       </div>
 
-      <div>
-        <div>добавить юзера</div>
-        <div>
-          <button onClick={() => addUser(teamId)}>ДОБАВИТЬ ИГРОКА</button>
-        </div>
-      </div>
       <div className="grid gap-3 grid-cols-2">
         <div className="bg-green-300 px-2">
           <div className="text-lg">участники</div>
 
           <div className="ml-4">
             {value.members?.map((user) => (
-              <div>{user.name || "Пользователь"}</div>
+              <div
+                className="cursor-pointer"
+                onClick={() => navigate(`/${user.id}`)}
+              >
+                {user.name || "Пользователь"}
+              </div>
             ))}
           </div>
         </div>
