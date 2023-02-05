@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import CreateCommentForm from "../features/comment/ui/forms/createCommentForm";
 import { ITournament } from "../features/tournament/lib/constant";
-
+import { ReactComponent as AvatarIcon } from "../public/icons/avatar.svg";
 import { RootState } from "../redux/store";
 
 import {
@@ -40,6 +40,22 @@ const TournamentByIdPage: FC = () => {
     );
   };
 
+  const gatDateTour = () => {};
+
+  const getDate = (value: string) => {
+    const elem = new Date(value);
+
+    if (elem) {
+      return new Intl.DateTimeFormat("ru-RU", {
+        day: "numeric",
+        month: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      }).format(elem);
+    }
+  };
+
   useEffect(() => {
     if (tournamentId) {
       fetchIdTournament(tournamentId).then((data) => setTournamentItem(data));
@@ -47,82 +63,99 @@ const TournamentByIdPage: FC = () => {
   }, [tournamentId]);
 
   return (
-    <div className="px-2 py-2 flex flex-col gap-4">
-      <div className="ml-auto">
-        <button
-          className="text-2xl font-extrabold text-green-800"
-          onClick={() => navigate("/")}
-        >
-          на главную
-        </button>
-      </div>
-
-      <div className="flex flex-col gap-2">
+    <div className="w-full">
+      <div className="grid gap-4">
         <div className="text-3xl">{tournamentItem?.name}</div>
 
-        <div>
+        <div className="flex gap-2">
           <div>призовые: {tournamentItem.prize}</div>
 
-          <div className="flex gap-4">
-            <div>
-              команд: {tournamentItem.teams?.length}/{tournamentItem.maxTeam}
-            </div>
-
-            <div>тип: {tournamentItem.typeTournament}</div>
-          </div>
-
           <div>
-            {user.teams.length > 0 && (
-              <>
-                <Select
-                  options={user.teams}
-                  name="team"
-                  onChange={(e) => setValue(e.target.value)}
-                />
-
-                <div>
-                  <button onClick={() => addTeam(tournamentId)}>
-                    ДОБАВИТЬ КОМАНДУ
-                  </button>
-                </div>
-              </>
-            )}
-
-            <div className="ml-4">
-              {tournamentItem.teams?.map((team) => (
-                <div
-                  className="cursor-pointer"
-                  onClick={() => navigate(`/team/${team.id}`)}
-                >
-                  {team.name}
-                </div>
-              ))}
-            </div>
+            команд: {tournamentItem.teams?.length}/{tournamentItem.maxTeam}
           </div>
 
-          <div>
-            <span>с: {tournamentItem.dateTournamentStart}</span>-
-            <span>по: {tournamentItem.dateTournamentEnd}</span>
-          </div>
+          <div>тип: {tournamentItem.typeTournament}</div>
+
+          {/* <div>
+            <span>{getDate(tournamentItem.dateTournamentStart)}</span>
+            {" / "}
+            <span>{getDate(tournamentItem.dateTournamentEnd)}</span>
+          </div> */}
         </div>
-      </div>
 
-      <div>
-        <div className="grid max-w-lg gap-4 mx-auto">
-          <div className="bg-orange-200 p-1">
-            <CreateCommentForm tournamentId={tournamentItem?.id} />
-          </div>
+        <div className="grid gap-4">
+          {user.teams.length > 0 && (
+            <div className="flex">
+              <Select
+                options={user.teams}
+                name="team"
+                onChange={(e) => setValue(e.target.value)}
+              />
 
-          <ul className="grid gap-2">
-            {tournamentItem.comments.map((comment) => (
-              <li className="bg-red-400 px-2 py-1 rounded">
-                <div>{comment.user.name || "Пользователь"}</div>
-                <div>{comment.text}</div>
-                <div>{comment.date}</div>
+              <div className="text-red-700">
+                <button onClick={() => addTeam(tournamentId)}>
+                  ДОБАВИТЬ КОМАНДУ
+                </button>
+              </div>
+            </div>
+          )}
+
+          <ul>
+            {tournamentItem.teams?.map((team) => (
+              <li
+                className="cursor-pointer"
+                onClick={() => navigate(`/team/${team.id}`)}
+              >
+                {team.name}
               </li>
             ))}
           </ul>
         </div>
+      </div>
+
+      <div className="grid">
+        {user.id && (
+          <div className="bg-orange-200 p-1">
+            <CreateCommentForm
+              tournamentItem={tournamentItem}
+              setTournamentItem={setTournamentItem}
+            />
+          </div>
+        )}
+
+        <ul className="flex gap-1 flex-col-reverse">
+          {tournamentItem.comments.map((comment) => (
+            <li className="bg-green-300 px-2 py-1 rounded">
+              <div className="flex items-center text-xl text-teal-600">
+                <div>
+                  {comment?.user?.logoURL && (
+                    <img
+                      className="flex w-10 h-10 object-cover rounded-full"
+                      src={comment.user.logoURL}
+                      alt="avatar"
+                    />
+                  )}
+
+                  {!comment?.user?.logoURL && (
+                    <div className="flex w-10 h-10 object-cover rounded-full">
+                      <AvatarIcon />
+                    </div>
+                  )}
+                </div>
+
+                <div
+                  className="ml-2 cursor-pointer"
+                  onClick={() => navigate(`/${comment.user.id}`)}
+                >
+                  {comment.user.name}
+                </div>
+              </div>
+              <div className="ml-2">{comment.text}</div>
+
+              <div className="text-xs">{getDate(comment.date)}</div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

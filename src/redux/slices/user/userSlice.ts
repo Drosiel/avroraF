@@ -10,6 +10,7 @@ const initialState: UserState = {
   data: {
     id: "",
     logo: null,
+    logoURL: null,
     name: null,
     rating: null,
     roles: [],
@@ -28,6 +29,18 @@ export const userSlice = createSlice({
         state.data = { ...action.payload };
       }
     },
+    addTeamForUser: (state, action) => {
+      state.data.teamsCreator = [
+        ...state.data.teamsCreator,
+        { ...action.payload },
+      ];
+    },
+    deleteTeamForUser: (state, action) => {
+      state.data.teamsCreator = state.data.teamsCreator.filter(
+        (item) => action.payload !== item.id
+      );
+    },
+
     logout: (state) => {
       state.data = initialState.data;
       deleteCookie("token");
@@ -35,6 +48,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { addUserData, logout } = userSlice.actions;
+export const { addUserData, addTeamForUser, deleteTeamForUser, logout } =
+  userSlice.actions;
 
 export default userSlice.reducer;

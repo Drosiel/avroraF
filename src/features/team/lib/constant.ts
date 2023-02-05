@@ -5,8 +5,9 @@ export interface ITeam {
   id: string;
   name: string;
   rating: number;
-  logo: string;
-  creatorId: string;
+  logo: string | null;
+  logoURL: string | null;
+  creator: IUser;
   members: IUser[] | null;
   tournaments: ITournament[] | null;
   stats: string;

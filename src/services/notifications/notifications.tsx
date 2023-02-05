@@ -2,8 +2,6 @@ import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { io } from "socket.io-client";
-import { ITeam } from "../../features/team/lib/constant";
-import { IUser } from "../../features/user/lib/constant";
 import { RootState } from "../../redux/store";
 import { Axios } from "../axios";
 import { getCookie } from "../cookies";

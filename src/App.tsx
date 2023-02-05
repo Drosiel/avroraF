@@ -2,15 +2,13 @@ import { useDispatch } from "react-redux";
 import { Route } from "react-router";
 import { Routes } from "react-router-dom";
 import { addTeamData } from "./redux/slices/teams/teamSlice";
-import PublicLayout from "./layouts/public/public";
+
 import LoginPage from "./pages/loginPage";
 import MainPage from "./pages/mainPage";
-import ProfilePage from "./pages/profilePage/ui/profilePage";
-import TeamPage from "./pages/teamPage";
+import ProfilePage from "./pages/profilePage";
 import TournamentByIdPage from "./pages/tournamentByIdPage";
 import TournamentPage from "./pages/tournamentPage";
 import { useEffect } from "react";
-
 import { fetchIsValidToken } from "./services/auth/auth";
 import { getCookie } from "./services/cookies";
 import { fetchAllTeam } from "./services/team/team";
@@ -18,8 +16,10 @@ import { fetchAllTournament } from "./services/tournament/tournament";
 import TeamByIdPage from "./pages/teamByIdPage";
 import { addUserData } from "./redux/slices/user/userSlice";
 import { addTournamentData } from "./redux/slices/tournaments/tournamentSlice";
-import RolePage from "./pages/rolePage";
 import UserPage from "./pages/userPage";
+import SearchPage from "./pages/searchPage";
+import AdminPage from "./pages/adminPage";
+import PublicLayout from "./layouts/publicLayouts/publicLayouts";
 
 function App() {
   const value = `; ${document.cookie}`;
@@ -49,11 +49,15 @@ function App() {
         />
 
         <Route path="/:userId" element={<UserPage />} />
+        <Route path="/search" element={<SearchPage />} />
 
-        <Route path="/team" element={<TeamPage />} />
         <Route path="/team/:teamId" element={<TeamByIdPage />} />
 
-        <Route path="/role" element={<RolePage />} />
+        <Route path="/faq" element={<MainPage />} />
+
+        <Route path="/about" element={<MainPage />} />
+
+        <Route path="/admin" element={<AdminPage />} />
       </Route>
 
       <Route path="/profile">

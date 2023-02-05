@@ -1,24 +1,29 @@
 import { Form, Formik } from "formik";
 import { FC, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import InputComponent from "../../../../shared/ui/input";
 import { RootState } from "../../../../redux/store";
 import { fetchCreateTeam } from "../../../../services/team/team";
 import { ITeam } from "../../lib/constant";
 import Button from "../../../../shared/ui/button";
+import { addTeamForUser } from "../../../../redux/slices/user/userSlice";
 
-const CreateTeamForm: FC = () => {
+const CreateTeamForm: FC<any> = ({ onClose }: any) => {
   const user = useSelector((state: RootState) => state.user.data);
+  const dispatch = useDispatch();
 
   const handleSubmit = (values: ITeam) => {
-    values.creatorId = user.id;
-    fetchCreateTeam(values);
+    fetchCreateTeam(values).then(
+      (data) => dispatch(addTeamForUser(data)),
+      onClose(false)
+    );
   };
 
   useEffect(() => {}, [user.id]);
 
   return (
     <Formik
+      enableReinitialize
       initialValues={{
         name: "",
         creatorId: user.id,

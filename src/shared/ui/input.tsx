@@ -1,7 +1,7 @@
 import { FC, HTMLInputTypeAttribute } from "react";
 
 interface IInputComponent {
-  label: string;
+  label?: string;
   name: string;
   value: any;
   type: HTMLInputTypeAttribute;
@@ -17,7 +17,7 @@ const InputComponent: FC<IInputComponent> = ({
 }) => {
   return (
     <div className="flex flex-col">
-      <span className="text-lg text-red-400">{label}</span>
+      {label && <span className="text-lg text-red-400">{label}</span>}
 
       <input
         className="border-solid border-red-400 border-2 px-3 py-2 rounded-md"

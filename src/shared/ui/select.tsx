@@ -14,7 +14,9 @@ const Select: FC<ISelect> = ({ name, options, onChange }) => {
       onChange={onChange}
     >
       {options?.map((opt: any, idx: any) => (
-        <option value={idx}>{opt?.name}</option>
+        <option selected={idx === 0} value={idx}>
+          {opt?.name}
+        </option>
       ))}
     </select>
   );

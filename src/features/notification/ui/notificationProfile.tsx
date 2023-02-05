@@ -1,11 +1,11 @@
 import { FC, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RootState } from "../../../../redux/store";
-import { fetchApproveUser } from "../../../../services/notifications/notifications";
-import Button from "../../../../shared/ui/button";
-import ConfirmForm from "../../../../widgets/forms/conformForm";
-import Modal from "../../../../widgets/modal/modal";
+import { RootState } from "../../../redux/store";
+import { fetchApproveUser } from "../../../services/notifications/notifications";
+import Button from "../../../shared/ui/button";
+import ConfirmForm from "../../../widgets/forms/conformForm";
+import Modal from "../../../widgets/modal/modal";
 
 const NotificationProfile: FC = () => {
   const navigate = useNavigate();

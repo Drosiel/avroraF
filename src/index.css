@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+.uploadcare--widget {
+  width: 100% !important;
+}
+
+.uploadcare--widget__button {
+  width: 100% !important;
+  cursor: pointer;
+}
+
+.uploadcare--widget__button_type_open {
+  background-color: #c75555;
+}
+.uploadcare--widget__button_type_open:hover {
+  background-color: #e97f7f;
+}
+.uploadcare--widget__button_type_open:focus {
+  background-color: #e97f7f;
+}

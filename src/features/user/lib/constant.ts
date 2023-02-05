@@ -3,7 +3,8 @@ import { ITeam } from "../../team/lib/constant";
 
 export interface IUser {
   id: string;
-  logo: null;
+  logo: string | null;
+  logoURL: string | null;
   name: string | null;
   rating: number | null;
   roles: IRole[];
@@ -22,4 +23,8 @@ export enum ROLE {
 export interface IRole {
   name: ROLE;
   id: string;
+}
+
+export interface IUsersList {
+  users: IUser[];
 }

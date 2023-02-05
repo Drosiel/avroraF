@@ -1,12 +1,20 @@
 import { AxiosResponse } from "axios";
 import { IRole } from "../../features/user/lib/constant";
-
 import { Axios } from "../axios";
+import { getCookie } from "../cookies";
 
-export const fetchAllUsers = async () => {
+const cookie = `; ${document.cookie}`;
+const token: any = getCookie("token", cookie);
+
+export const fetchAllUsers = async ({ userQuery }: any) => {
   try {
     const { data, status }: AxiosResponse<any> = await Axios.get(
-      "/user/findAll"
+      "/user/findAll",
+      {
+        params: {
+          userQuery: userQuery,
+        },
+      }
     );
 
     if (status === 200) {
@@ -15,8 +23,8 @@ export const fetchAllUsers = async () => {
   } catch (error) {}
 };
 
-export const fetchUserEdit = async ({ name, id, token }: any) => {
-  const model = { name, id };
+export const fetchUserEdit = async ({ name, id, logo }: any) => {
+  const model = { name, id, logo };
 
   try {
     const { data, status }: AxiosResponse<any> = await Axios.put(

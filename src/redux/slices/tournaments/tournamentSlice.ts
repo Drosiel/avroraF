@@ -16,9 +16,16 @@ export const tournamentSlice = createSlice({
     addTournamentData: (state, action) => {
       state.data = action.payload;
     },
+    addTournamentForData: (state, action) => {
+      state.data = [...state.data, action.payload];
+    },
+    deleteTournament: (state, action) => {
+      state.data = state.data.filter((item) => action.payload !== item.id);
+    },
   },
 });
 
-export const { addTournamentData } = tournamentSlice.actions;
+export const { addTournamentData, addTournamentForData, deleteTournament } =
+  tournamentSlice.actions;
 
 export default tournamentSlice.reducer;

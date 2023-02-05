@@ -19,7 +19,7 @@ export const fetchAllTeam = async () => {
   } catch (error) {}
 };
 
-export const fetchCreateTeam = async ({ name, creatorId }: ITeam) => {
+export const fetchCreateTeam = async ({ name, creatorId }: any) => {
   const model = { name, creatorId };
 
   try {
@@ -43,6 +43,26 @@ export const fetchIdTeam = async (id: string) => {
   try {
     const { data, status }: AxiosResponse<any> = await Axios.get(`/team/${id}`);
 
+    if (status === 200) {
+      return data;
+    }
+  } catch (error) {}
+};
+
+//редактировать команду
+export const fetchTeamEdit = async ({ name, id, logo }: any) => {
+  const model = { name, id, logo };
+
+  try {
+    const { data, status }: AxiosResponse<any> = await Axios.put(
+      "/team/edit",
+      model,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     if (status === 200) {
       return data;
     }

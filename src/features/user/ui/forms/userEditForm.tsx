@@ -1,37 +1,43 @@
 import { Form, Formik } from "formik";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InputComponent from "../../../../shared/ui/input";
 import { RootState } from "../../../../redux/store";
 import { fetchUserEdit } from "../../../../services/user/user";
 import Button from "../../../../shared/ui/button";
-import { getCookie } from "../../../../services/cookies";
-import { IToken } from "../../../auth/lib/constant";
 import { addUserData } from "../../../../redux/slices/user/userSlice";
+import ImageLoader from "../../../../shared/ui/imageLoader";
+import { fetchRemoveImage } from "../../../../services/uploadcare/uploadcare";
 
 const UserEditForm: FC = () => {
   const user = useSelector((state: RootState) => state.user.data);
   const dispatch = useDispatch();
 
-  const value = `; ${document.cookie}`;
-  const token: any = getCookie("token", value);
+  const [logoId, setLogoId] = useState(null);
+  const [value, setValue] = useState<any>("");
 
   const handleSubmit = (values: {
     name: string;
     id: string | null;
-    token: IToken;
+    logo: string | null;
   }) => {
     values.id = user.id;
-    values.token = token;
+    values.logo = logoId ? logoId : user.logo;
+
+    if (logoId !== user.logo && user.logo) {
+      fetchRemoveImage(user.logo);
+    }
 
     fetchUserEdit(values).then((data) => dispatch(addUserData(data)));
+    setValue(null);
   };
 
   return (
     <div>
       <Formik
+        enableReinitialize
         initialValues={{
-          name: null,
+          name: user.name,
         }}
         onSubmit={(values: any) => {
           handleSubmit(values);
@@ -41,13 +47,18 @@ const UserEditForm: FC = () => {
       >
         {({ values, handleChange }) => (
           <Form noValidate>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-4">
               <InputComponent
                 label="имя"
                 name="name"
                 type="text"
                 value={values.name}
                 handleChange={handleChange}
+              />
+
+              <ImageLoader
+                onChange={(e: any) => setLogoId(e.uuid)}
+                value={value}
               />
 
               <Button text="Изменить" type="submit" />

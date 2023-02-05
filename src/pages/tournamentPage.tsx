@@ -1,24 +1,44 @@
-import { FC } from "react";
-import { useNavigate } from "react-router-dom";
+import { FC, useState } from "react";
+import { useSelector } from "react-redux";
+
 import CreateTournamentForm from "../features/tournament/ui/forms/createTournamentForm";
+import { ROLE } from "../features/user/lib/constant";
+import { RootState } from "../redux/store";
+import Button from "../shared/ui/button";
+import CardTournament from "../widgets/cards/cardToutnament";
+import Modal from "../widgets/modal/modal";
 
 const TournamentPage: FC = () => {
-  const navigate = useNavigate();
+  const tournament = useSelector((state: RootState) => state.tournament.data);
+  const user = useSelector((state: RootState) => state.user.data);
+
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="px-2 py-2 flex flex-col gap-4 items-center">
-      <div className="ml-auto">
-        <button
-          className="text-2xl font-extrabold text-green-800"
-          onClick={() => navigate("/")}
-        >
-          на главную
-        </button>
-      </div>
+    <div className="px-2 py-2 flex gap-4 flex-col">
+      {user.roles?.some((role) => role.name === ROLE.ADMIN) && (
+        <div>
+          <Button
+            typeButton="secondary"
+            text="СОЗДАТЬ ТУРНИР"
+            onClick={() => setOpen(true)}
+          />
+        </div>
+      )}
 
-      <div className="flex flex-col gap-2 w-96">
-        <CreateTournamentForm />
-      </div>
+      {tournament && (
+        <div className="grid gap-4 grid-cols-4">
+          {tournament.map((item) => (
+            <CardTournament item={item} />
+          ))}
+        </div>
+      )}
+
+      {open && (
+        <Modal textHeader="Создание турнира" open={open} onClose={setOpen}>
+          <CreateTournamentForm onClose={setOpen} />
+        </Modal>
+      )}
     </div>
   );
 };

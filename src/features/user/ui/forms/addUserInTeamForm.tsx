@@ -18,8 +18,6 @@ const AddUserInTeamForm: FC<IAddUserInTeamForm> = ({ user, userId }) => {
   const [team, setTeam] = useState<any>(null);
 
   const handleSubmit = (values: any) => {
-    console.log(team.target.value);
-
     fetchAddUserInTeam(user, creator.teamsCreator[team.target.value].id);
   };
 

@@ -4,10 +4,18 @@ import InputComponent from "../../../../shared/ui/input";
 import { fetchCreateTournament } from "../../../../services/tournament/tournament";
 import { ITournament } from "../../lib/constant";
 import Button from "../../../../shared/ui/button";
+import { useDispatch } from "react-redux";
+import { addTournamentForData } from "../../../../redux/slices/tournaments/tournamentSlice";
 
-const CreateTournamentForm: FC = () => {
+const CreateTournamentForm: FC<any> = ({ onClose }) => {
+  const dispatch = useDispatch();
+
   const handleSubmit = (values: ITournament) => {
-    fetchCreateTournament(values);
+    fetchCreateTournament(values).then((data) =>
+      dispatch(addTournamentForData(data))
+    );
+
+    onClose(false);
   };
 
   return (
