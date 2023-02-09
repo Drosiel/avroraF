@@ -6,7 +6,7 @@ import {
 } from "../api/interceptors";
 
 export const Axios = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: `${process.env.REACT_APP_UPLOADCARE_KEY}:3001`,
 });
 
 Axios.interceptors.request.use(requestInterceptor, responseInterceptorError);
