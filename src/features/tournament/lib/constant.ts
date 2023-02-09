@@ -2,15 +2,15 @@ import { IComment } from "../../comment/lib/constant";
 import { ITeam } from "../../team/lib/constant";
 
 export interface ITournament {
-  bracket: string | null;
-  countTeam: number;
-  dateTournamentEnd: string;
-  dateTournamentStart: string;
   id: string;
-  image: string | null;
-  maxTeam: number;
   name: string;
+  dateTournamentStart: string;
+  dateTournamentEnd: string;
+  maxTeam: number;
   prize: number;
+  image?: string | null;
+  imageURL?: string | null;
+  bracket: string | null;
   typeTournament: string;
   teams: ITeam[];
   comments: IComment[];

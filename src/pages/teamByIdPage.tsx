@@ -61,9 +61,11 @@ const TeamByIdPage: FC = () => {
           <div>{value.rating}</div>
         </div>
 
-        <div>
-          <Button text="редактировать команду" onClick={setOpen} />
-        </div>
+        {user.id === value.creator.id && (
+          <div>
+            <Button text="редактировать команду" onClick={setOpen} />
+          </div>
+        )}
       </div>
 
       <div className="grid gap-3 grid-cols-2">

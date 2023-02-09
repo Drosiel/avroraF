@@ -24,8 +24,6 @@ const EditTeamForm: FC<{ team: ITeam }> = ({ team }) => {
     logo: string | null;
   }) => {
     if (user.id !== team.creator.id) {
-      console.log(user);
-      console.log(team);
       return null;
     }
 

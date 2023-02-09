@@ -20,24 +20,44 @@ const UserPage: FC = () => {
   }, [userId]);
 
   return (
-    <div className="px-2 py-2 flex flex-col gap-4">
-      <div>{user?.name}</div>
+    <div className="pt-5">
+      <div className="flex gap-4">
+        {user?.logoURL && (
+          <img className="w-40 h-40" src={user?.logoURL} alt="avatar" />
+        )}
 
-      {user?.teams && (
-        <div className="flex gap-2">
-          {user?.teams.map((team) => (
-            <div
-              className="cursor-pointer bg-lime-400 p-3"
-              onClick={() => navigate(`/team/${team.id}`)}
-            >
-              {team?.name}
+        <div className="w-full">
+          <div className="flex">
+            <span className="text-2xl">{user?.name}</span>
+
+            <div className="ml-auto">
+              <Button text="Пригласить игрока" onClick={() => setOpen(true)} />
             </div>
-          ))}
-        </div>
-      )}
+          </div>
 
-      <div>
-        <Button text="Пригласить игрока" onClick={() => setOpen(true)} />
+          {user?.teams && (
+            <div>
+              <p>команды</p>
+
+              <div className="grid gap-2 grid-cols-5 mt-3 ml-3">
+                {user?.teams.map((team) => (
+                  <div
+                    className="cursor-pointer bg-[#4B4B52] p-[2px]"
+                    onClick={() => navigate(`/team/${team.id}`)}
+                  >
+                    {team?.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className=" flex flex-col w-72 rounded items-center justify-center mt-5 bg-[#4B4B52] p-4">
+        <div>рейтинг</div>
+
+        <div className="text-3xl font-bold text-[#FA7A02]">{user?.rating}</div>
       </div>
 
       {open && user && (

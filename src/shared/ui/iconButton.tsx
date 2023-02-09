@@ -1,14 +1,14 @@
 import { FC } from "react";
 
-interface IButton {
-  text: string;
+interface IIconButton {
+  icon: any;
   typeButton?: "ok" | "secondary" | "primary" | "cancel";
   type?: "button" | "submit" | "reset" | undefined;
   onClick?: (value: any) => any;
 }
 
-const Button: FC<IButton> = ({
-  text,
+const IconButton: FC<IIconButton> = ({
+  icon,
   typeButton = "primary",
   type = "button",
   onClick,
@@ -34,13 +34,13 @@ const Button: FC<IButton> = ({
 
   return (
     <button
-      className={`rounded-xl uppercase px-4 py-2 border-2 ${setTypeButton()}`}
+      className={`flex items-center justify-center p-2 rounded border-2 ${setTypeButton()}`}
       type={type}
       onClick={onClick}
     >
-      {text}
+      <div className="w-4 h-4">{icon}</div>
     </button>
   );
 };
 
-export default Button;
+export default IconButton;

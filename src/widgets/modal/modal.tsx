@@ -12,7 +12,7 @@ const Modal = ({ textHeader, children, open, onClose }: any) => {
     createPortal(
       <div
         id="wrapper"
-        className="fixed flex inset-0 bg-black bg-opacity-25 backdrop-blur-sm p-32 justify-center"
+        className="fixed flex inset-0 bg-white bg-opacity-25 backdrop-blur-sm p-32 justify-center"
         onClick={onOverlayClick}
       >
         <div className="min-w-[500px] flex flex-col">
@@ -23,7 +23,7 @@ const Modal = ({ textHeader, children, open, onClose }: any) => {
             X
           </button>
 
-          <div className="bg-white p-2 rounded">
+          <div className="bg-[#202025] p-4 rounded">
             <div className="text-center mb-2 font-medium text-xl">
               {textHeader}
             </div>

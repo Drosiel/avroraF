@@ -32,45 +32,49 @@ const CreateCommentForm: FC<{
   useEffect(() => {}, [user.id]);
 
   return (
-    <Formik
-      initialValues={{
-        text: "",
-        userId: "",
-        tournamentId: "",
-      }}
-      onSubmit={(values, actions) => {
-        handleSubmit(values).then(() => {
-          actions.setSubmitting(false);
-          actions.resetForm({
-            values: {
-              text: "",
-              userId: "",
-              tournamentId: "",
-            },
+    <div className="w-full bg-[#4B4B52] p-3 rounded">
+      <Formik
+        initialValues={{
+          text: "",
+          userId: "",
+          tournamentId: "",
+        }}
+        onSubmit={(values, actions) => {
+          handleSubmit(values).then(() => {
+            actions.setSubmitting(false);
+            actions.resetForm({
+              values: {
+                text: "",
+                userId: "",
+                tournamentId: "",
+              },
+            });
           });
-        });
-      }}
-      validateOnChange={false}
-      validateOnBlur={false}
-    >
-      {({ values, handleChange }) => (
-        <Form noValidate>
-          <div className="flex flex-col">
-            <textarea
-              className="border-amber-700"
-              value={values.text}
-              name="text"
-              id=""
-              cols={30}
-              rows={10}
-              onChange={handleChange}
-            ></textarea>
+        }}
+        validateOnChange={false}
+        validateOnBlur={false}
+      >
+        {({ values, handleChange }) => (
+          <Form noValidate>
+            <div className="flex flex-col">
+              <textarea
+                className="border-amber-700 bg-[#4B4B52] focus:outline-none"
+                value={values.text}
+                name="text"
+                id=""
+                rows={3}
+                onChange={handleChange}
+                placeholder="Написать комментарий"
+              ></textarea>
 
-            <Button text="Отправить" type="submit" />
-          </div>
-        </Form>
-      )}
-    </Formik>
+              <div className="flex justify-end">
+                <Button text="Отправить" type="submit" />
+              </div>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 };
 

@@ -1,16 +1,21 @@
 import { Form, Formik } from "formik";
-import { FC } from "react";
+import { FC, useState } from "react";
 import InputComponent from "../../../../shared/ui/input";
 import { fetchCreateTournament } from "../../../../services/tournament/tournament";
 import { ITournament } from "../../lib/constant";
 import Button from "../../../../shared/ui/button";
 import { useDispatch } from "react-redux";
 import { addTournamentForData } from "../../../../redux/slices/tournaments/tournamentSlice";
+import ImageLoader from "../../../../shared/ui/imageLoader";
 
 const CreateTournamentForm: FC<any> = ({ onClose }) => {
   const dispatch = useDispatch();
 
+  const [imageId, setImageId] = useState(null);
+
   const handleSubmit = (values: ITournament) => {
+    values.image = imageId;
+
     fetchCreateTournament(values).then((data) =>
       dispatch(addTournamentForData(data))
     );
@@ -79,6 +84,11 @@ const CreateTournamentForm: FC<any> = ({ onClose }) => {
                 type="text"
                 value={values.typeTournament}
                 handleChange={handleChange}
+              />
+
+              <ImageLoader
+                onChange={(e: any) => setImageId(e.uuid)}
+                value={imageId}
               />
 
               <Button text="Создать турнир" type="submit" />

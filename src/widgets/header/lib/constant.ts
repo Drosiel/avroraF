@@ -15,8 +15,4 @@ export const Menu = [
     name: "О нас",
     link: "about",
   },
-  {
-    name: "Поиск",
-    link: "search",
-  },
 ];

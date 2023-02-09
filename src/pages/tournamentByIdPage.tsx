@@ -21,7 +21,6 @@ const TournamentByIdPage: FC = () => {
 
   const [tournamentItem, setTournamentItem] = useState<ITournament>({
     bracket: "",
-    countTeam: 0,
     dateTournamentEnd: "",
     dateTournamentStart: "",
     id: "",
@@ -63,8 +62,8 @@ const TournamentByIdPage: FC = () => {
   }, [tournamentId]);
 
   return (
-    <div className="w-full">
-      <div className="grid gap-4">
+    <div className="w-full grid gap-4 pt-5">
+      <div className="grid gap-2">
         <div className="text-3xl">{tournamentItem?.name}</div>
 
         <div className="flex gap-2">
@@ -75,17 +74,11 @@ const TournamentByIdPage: FC = () => {
           </div>
 
           <div>тип: {tournamentItem.typeTournament}</div>
-
-          {/* <div>
-            <span>{getDate(tournamentItem.dateTournamentStart)}</span>
-            {" / "}
-            <span>{getDate(tournamentItem.dateTournamentEnd)}</span>
-          </div> */}
         </div>
 
-        <div className="grid gap-4">
+        <div className="flex flex-col gap-2">
           {user.teams.length > 0 && (
-            <div className="flex">
+            <div className="flex w-96">
               <Select
                 options={user.teams}
                 name="team"
@@ -100,59 +93,74 @@ const TournamentByIdPage: FC = () => {
             </div>
           )}
 
-          <ul>
+          <ul className="grid grid-cols-4 gap-2">
             {tournamentItem.teams?.map((team) => (
               <li
-                className="cursor-pointer"
+                className="flex gap-2 bg-green-300 p-2 cursor-pointer hover:bg-green-200 flex-1 items-center"
                 onClick={() => navigate(`/team/${team.id}`)}
               >
-                {team.name}
+                {team.logoURL && (
+                  <img
+                    className="w-12 h-12 rounded-full object-cover"
+                    src={team.logoURL}
+                    alt="logo"
+                  />
+                )}
+
+                <span>{team.name}</span>
               </li>
             ))}
           </ul>
         </div>
       </div>
 
-      <div className="grid">
-        {user.id && (
-          <div className="bg-orange-200 p-1">
-            <CreateCommentForm
-              tournamentItem={tournamentItem}
-              setTournamentItem={setTournamentItem}
-            />
-          </div>
-        )}
+      <div className="grid gap-4 p-5 rounded bg-[#29292E]">
+        <div>
+          <h2 className="text-lg text-[#FA7A02]">Комментарии</h2>
 
-        <ul className="flex gap-1 flex-col-reverse">
+          {user.id && (
+            <div>
+              <CreateCommentForm
+                tournamentItem={tournamentItem}
+                setTournamentItem={setTournamentItem}
+              />
+            </div>
+          )}
+        </div>
+
+        <ul className="flex gap-4 flex-col-reverse">
           {tournamentItem.comments.map((comment) => (
-            <li className="bg-green-300 px-2 py-1 rounded">
-              <div className="flex items-center text-xl text-teal-600">
-                <div>
-                  {comment?.user?.logoURL && (
-                    <img
-                      className="flex w-10 h-10 object-cover rounded-full"
-                      src={comment.user.logoURL}
-                      alt="avatar"
-                    />
-                  )}
+            <li className="flex">
+              <div>
+                {comment?.user?.logoURL && (
+                  <img
+                    className="flex w-10 h-10 object-cover rounded-full"
+                    src={comment.user.logoURL}
+                    alt="avatar"
+                  />
+                )}
 
-                  {!comment?.user?.logoURL && (
-                    <div className="flex w-10 h-10 object-cover rounded-full">
-                      <AvatarIcon />
-                    </div>
-                  )}
-                </div>
-
-                <div
-                  className="ml-2 cursor-pointer"
-                  onClick={() => navigate(`/${comment.user.id}`)}
-                >
-                  {comment.user.name}
-                </div>
+                {!comment?.user?.logoURL && (
+                  <div className="flex w-10 h-10 object-cover rounded-full">
+                    <AvatarIcon />
+                  </div>
+                )}
               </div>
-              <div className="ml-2">{comment.text}</div>
 
-              <div className="text-xs">{getDate(comment.date)}</div>
+              <div className="grid gap-1 ml-2 text-sm">
+                <div className="flex gap-2 items-center">
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => navigate(`/${comment.user.id}`)}
+                  >
+                    {comment.user.name}
+                  </div>
+
+                  <div className="text-xs">{getDate(comment.date)}</div>
+                </div>
+
+                <div>{comment.text}</div>
+              </div>
             </li>
           ))}
         </ul>

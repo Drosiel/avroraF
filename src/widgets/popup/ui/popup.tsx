@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 
-const Popup = ({ textHeader, children, open, onClose }: any) => {
+const Popup = ({ textHeader, children, open, onClose, offset }: any) => {
   const onOverlayClick = (e: any) => {
     if (e.target.className === "wrapper") {
       onClose(false);

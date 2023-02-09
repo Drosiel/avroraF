@@ -1,6 +1,5 @@
 import { Form, Formik } from "formik";
 import { FC, useState } from "react";
-import InputComponent from "../../../../shared/ui/input";
 import Button from "../../../../shared/ui/button";
 import { fetchAddUserInTeam } from "../../../../services/team/team";
 import { IUser } from "../../lib/constant";

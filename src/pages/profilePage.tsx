@@ -12,6 +12,8 @@ import Modal from "../widgets/modal/modal";
 import CreateTeamForm from "../features/team/ui/forms/createTeamForm";
 import NotificationProfile from "../features/notification/ui/notificationProfile";
 import { deleteTeamForUser } from "../redux/slices/user/userSlice";
+import ConfirmForm from "../widgets/forms/conformForm";
+import { fetchRemoveImage } from "../services/uploadcare/uploadcare";
 
 const ProfilePage: FC = () => {
   const navigate = useNavigate();
@@ -19,15 +21,25 @@ const ProfilePage: FC = () => {
   const user = useSelector((state: RootState) => state.user.data);
 
   const [open, setOpen] = useState(false);
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [team, setTeam] = useState<any>({});
 
-  const deleteTeam = (id: string) => {
-    fetchRemoveTeam(user.id, id).then((data) =>
-      dispatch(deleteTeamForUser(id))
-    );
+  const deleteTeam = (value: boolean) => {
+    setOpenConfirm(false);
+
+    if (value) {
+      if (team?.logo) {
+        fetchRemoveImage(team?.logo);
+      }
+
+      fetchRemoveTeam(user.id, team?.id).then((data) =>
+        dispatch(deleteTeamForUser(team?.id))
+      );
+    }
   };
 
   return (
-    <div>
+    <div className="bg-[#202025] min-h-screen">
       <div className="m-auto max-w-screen-2xl px-2 py-4 flex flex-col gap-6">
         <div
           className="cursor-pointer text-orange-300"
@@ -70,12 +82,20 @@ const ProfilePage: FC = () => {
               </div>
 
               <ul className="grid gap-4 p-2">
-                {user.teams.map((item: any) => (
+                {user.teams.map((item: ITeam) => (
                   <li
-                    className="flex gap-2 bg-green-300 p-2 cursor-pointer hover:bg-green-200"
+                    className="flex gap-2 bg-[#29292E] p-2 cursor-pointer flex-1 items-center"
                     onClick={() => navigate(`/team/${item.id}`)}
                   >
-                    {item.name}
+                    {item.logoURL && (
+                      <img
+                        className="w-12 h-12 rounded-full object-cover"
+                        src={item.logoURL}
+                        alt="logo"
+                      />
+                    )}
+
+                    <span>{item.name}</span>
                   </li>
                 ))}
               </ul>
@@ -90,16 +110,27 @@ const ProfilePage: FC = () => {
                 {user.teamsCreator.map((item: ITeam) => (
                   <li className="flex">
                     <div
-                      className="flex gap-2 bg-green-300 p-2 cursor-pointer hover:bg-green-200 flex-1"
+                      className="flex gap-2 bg-[#29292E] p-2 cursor-pointer flex-1 items-center"
                       onClick={() => navigate(`/team/${item.id}`)}
                     >
-                      {item.name}
+                      {item.logoURL && (
+                        <img
+                          className="w-12 h-12 rounded-full object-cover"
+                          src={item.logoURL}
+                          alt="logo"
+                        />
+                      )}
+
+                      <span className="ml-4">{item.name}</span>
                     </div>
 
                     <div className="h-full">
                       <button
                         className="bg-red-600 text-orange-50 px-2 h-full"
-                        onClick={() => deleteTeam(item.id)}
+                        onClick={() => {
+                          setOpenConfirm(true);
+                          setTeam(item);
+                        }}
                       >
                         Удалить команду
                       </button>
@@ -115,9 +146,11 @@ const ProfilePage: FC = () => {
           </div>
 
           <div className="flex gap-2">
-            <div>
-              <Button text="СОЗДАТЬ КОМАНДУ" onClick={() => setOpen(true)} />
-            </div>
+            {user.teamsCreator.length < 2 && (
+              <div>
+                <Button text="СОЗДАТЬ КОМАНДУ" onClick={() => setOpen(true)} />
+              </div>
+            )}
 
             {user.roles?.some((role) => role.name === ROLE.ADMIN) && (
               <div>
@@ -127,6 +160,16 @@ const ProfilePage: FC = () => {
           </div>
         </div>
       </div>
+
+      {openConfirm && (
+        <Modal
+          textHeader="Подтверждение"
+          open={openConfirm}
+          onClose={setOpenConfirm}
+        >
+          <ConfirmForm onClick={deleteTeam} />
+        </Modal>
+      )}
 
       {open && (
         <Modal textHeader="Создание команды" open={open} onClose={setOpen}>

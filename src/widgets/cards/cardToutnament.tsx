@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ITournament } from "../../features/tournament/lib/constant";
@@ -7,6 +7,8 @@ import { deleteTournament } from "../../redux/slices/tournaments/tournamentSlice
 
 import { RootState } from "../../redux/store";
 import { fetchRemoveTournament } from "../../services/tournament/tournament";
+import { fetchRemoveImage } from "../../services/uploadcare/uploadcare";
+import Button from "../../shared/ui/button";
 import ConfirmForm from "../forms/conformForm";
 import Modal from "../modal/modal";
 
@@ -34,6 +36,10 @@ const CardTournament: FC<ICardTournament> = ({ item }) => {
     setOpen(false);
 
     if (value) {
+      if (item.image) {
+        fetchRemoveImage(item.image);
+      }
+
       fetchRemoveTournament(item.id).then((data) =>
         dispatch(deleteTournament(item.id))
       );
@@ -75,15 +81,15 @@ const CardTournament: FC<ICardTournament> = ({ item }) => {
         <div>{getBadge()}</div>
 
         <div className="mt-2">
-          <div className="flex justify-center">
-            <div className="bg-slate-200 rounded-full w-16 h-16 flex items-center justify-center border-indigo-600 border">
-              logo1
+          {item.imageURL && (
+            <div className="flex justify-center relative">
+              <img
+                className="flex object-cover bg-slate-200 rounded-full w-56 h-28 overflow-hidden"
+                src={item.imageURL}
+                alt="logo"
+              />
             </div>
-
-            <div className="bg-slate-200 rounded-full w-16 h-16 flex items-center justify-center border-indigo-600 border -ml-7">
-              logo2
-            </div>
-          </div>
+          )}
 
           <div className="flex justify-center mt-4 text-2xl whitespace-nowrap overflow-hidden font-semibold text-white">
             <span>{item.name}</span>
@@ -122,14 +128,11 @@ const CardTournament: FC<ICardTournament> = ({ item }) => {
       </div>
 
       {user.roles?.some((role) => role.name === ROLE.ADMIN) && (
-        <div>
-          <button
-            className="bg-red-500 px-3 py-1 rounded w-full"
-            onClick={() => setOpen(true)}
-          >
-            удалить турнир
-          </button>
-        </div>
+        <Button
+          text="удалить турнир"
+          onClick={() => setOpen(true)}
+          typeButton="cancel"
+        />
       )}
 
       {open && (
