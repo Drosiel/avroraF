@@ -22,7 +22,7 @@ const Header: FC = () => {
         className="uppercase font-bold text-orange-300 text-2xl px-8 cursor-pointer"
         onClick={() => navigate("/")}
       >
-        logo
+        Avrora
       </div>
 
       <div className="divide-y-2 h-[80%] bg-white bg-opacity-5 w-[2px]"></div>
