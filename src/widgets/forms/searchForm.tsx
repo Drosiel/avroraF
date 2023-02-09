@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Form, Formik } from "formik";
 import { FC, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { fetchSearch } from "../../services/search/search";
-import { fetchAllUsers } from "../../services/user/user";
+
 import Button from "../../shared/ui/button";
 import InputComponent from "../../shared/ui/input";
 

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IUser, IRole, ROLE } from "../../../features/user/lib/constant";
+import { IUser } from "../../../features/user/lib/constant";
 import { deleteCookie } from "../../../services/cookies";
 
 export interface UserState {

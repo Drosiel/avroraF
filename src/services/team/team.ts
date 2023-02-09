@@ -1,5 +1,4 @@
 import { AxiosResponse } from "axios";
-import { ITeam } from "../../features/team/lib/constant";
 import { IUser } from "../../features/user/lib/constant";
 import { Axios } from "../axios";
 import { getCookie } from "../cookies";

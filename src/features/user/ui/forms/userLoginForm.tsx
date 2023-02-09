@@ -1,5 +1,5 @@
 import { Form, Formik } from "formik";
-import { FC, useState, useEffect } from "react";
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import InputComponent from "../../../../shared/ui/input";
 import { fetchLogin } from "../../../../services/auth/auth";

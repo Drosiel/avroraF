@@ -39,8 +39,6 @@ const TournamentByIdPage: FC = () => {
     );
   };
 
-  const gatDateTour = () => {};
-
   const getDate = (value: string) => {
     const elem = new Date(value);
 
