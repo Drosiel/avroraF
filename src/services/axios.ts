@@ -6,7 +6,7 @@ import {
 } from "../api/interceptors";
 
 export const Axios = axios.create({
-  baseURL: `https://avrorab-production.up.railway.app:3001`,
+  baseURL: `https://avrorab-production.up.railway.app`,
 });
 
 Axios.interceptors.request.use(requestInterceptor, responseInterceptorError);
