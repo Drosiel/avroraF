@@ -31,21 +31,23 @@ const UserLoginForm: FC = () => {
       >
         {({ values, handleChange }) => (
           <Form noValidate>
-            <div className="flex flex-col">
-              <InputComponent
-                label="почта"
-                name="email"
-                type="email"
-                value={values.email}
-                handleChange={handleChange}
-              />
-              <InputComponent
-                label="пароль"
-                name="password"
-                type="password"
-                value={values.password}
-                handleChange={handleChange}
-              />
+            <div className="grid gap-8">
+              <div className="grid gap-2">
+                <InputComponent
+                  label="Почта"
+                  name="email"
+                  type="email"
+                  value={values.email}
+                  handleChange={handleChange}
+                />
+                <InputComponent
+                  label="Пароль"
+                  name="password"
+                  type="password"
+                  value={values.password}
+                  handleChange={handleChange}
+                />
+              </div>
 
               <Button text="Войти" type="submit" />
             </div>

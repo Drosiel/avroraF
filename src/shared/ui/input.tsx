@@ -17,7 +17,7 @@ const InputComponent: FC<IInputComponent> = ({
 }) => {
   return (
     <div className="flex flex-col">
-      {label && <span className="text-lg text-red-400">{label}</span>}
+      {label && <span className="text-lg text-[#FA7A02]">{label}</span>}
 
       <input
         className="bg-[#29292E] focus:outline-none px-3 py-2 rounded text-[#FFFFFF]"

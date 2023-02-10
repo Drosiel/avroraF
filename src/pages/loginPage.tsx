@@ -9,7 +9,13 @@ const LoginPage: FC = () => {
   return (
     <div className="flex justify-center py-6">
       <div className="flex flex-col w-96 gap-4">
-        <div>{value ? <UserRegistrationForm /> : <UserLoginForm />}</div>
+        <div>
+          {value ? (
+            <UserRegistrationForm isRegistration={setValue} />
+          ) : (
+            <UserLoginForm />
+          )}
+        </div>
 
         <Button
           typeButton="secondary"
