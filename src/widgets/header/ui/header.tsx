@@ -19,7 +19,7 @@ const Header: FC = () => {
   return (
     <div className="flex gap-4 items-center h-[70px] pl-8 pr-16 border-b-2 border-white border-opacity-30">
       <div
-        className="uppercase font-bold text-orange-300 text-2xl px-8 cursor-pointer"
+        className="uppercase font-bold text-orange-300 text-base sm:text-2xl px-8 cursor-pointer"
         onClick={() => navigate("/")}
       >
         Avrora
@@ -27,9 +27,10 @@ const Header: FC = () => {
 
       <div className="divide-y-2 h-[80%] bg-white bg-opacity-5 w-[2px]"></div>
 
-      <nav className="flex ml-16 flex-1 gap-4">
+      <nav className="hidden ml-16 flex-1 gap-4 sm:flex">
         {Menu.map((item) => (
           <Link
+            key={item.name}
             className="cursor-pointer text-[#FA7A02] text-sm uppercase whitespace-nowrap"
             to={`/${item.link}`}
           >
@@ -57,7 +58,7 @@ const Header: FC = () => {
       <div className="flex gap-4 text-base cursor-pointer">
         {user.name && (
           <div
-            className="flex items-center cursor-pointer text-2xl"
+            className="flex items-center cursor-pointer text-base sm:text-2xl"
             onClick={() => navigate("/profile")}
           >
             {user.logoURL && (
@@ -82,7 +83,7 @@ const Header: FC = () => {
 
         {user.name && (
           <div
-            className="flex items-center ml-4 text-[#FA7A02] text-2xl"
+            className="flex items-center ml-4 text-[#FA7A02] text-base sm:text-2xl"
             onClick={() => dispatch(logout())}
           >
             выйти

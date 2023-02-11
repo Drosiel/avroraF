@@ -75,6 +75,7 @@ const TeamByIdPage: FC = () => {
           <div className="ml-4">
             {value.members?.map((user: any) => (
               <div
+                key={user.id}
                 className="cursor-pointer"
                 onClick={() => navigate(`/${user.id}`)}
               >
@@ -88,12 +89,13 @@ const TeamByIdPage: FC = () => {
           <div className="text-lg">турниры</div>
 
           <div className="ml-4">
-            {value.tournaments?.map((tournaments: any) => (
+            {value.tournaments?.map((tournament: any) => (
               <div
+                key={tournament.id}
                 className="cursor-pointer"
-                onClick={() => navigate(`/tournament/${tournaments.id}`)}
+                onClick={() => navigate(`/tournament/${tournament.id}`)}
               >
-                {tournaments.name}
+                {tournament.name}
               </div>
             ))}
           </div>

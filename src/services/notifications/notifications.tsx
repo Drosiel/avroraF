@@ -6,7 +6,7 @@ import { RootState } from "../../redux/store";
 import { Axios } from "../axios";
 import { getCookie } from "../cookies";
 
-const socket = io("ws://localhost:3001");
+const socket = io("ws://avrorab-production.up.railway.app");
 
 const cookie = `; ${document.cookie}`;
 const token: any = getCookie("token", cookie);
@@ -60,13 +60,13 @@ export const Notifications = () => {
   );
 };
 
-export const fetchNotificationAddUserInTeam = async (
+export const fetchNotificationUser = async (
   userId: string,
   initiatorId: string,
-  teamId: string,
-  text: string
+  typeNotification: string,
+  teamId?: string
 ) => {
-  const model = { userId, initiatorId, teamId, text };
+  const model = { initiatorId, userId, typeNotification, teamId };
 
   try {
     const { data, status }: AxiosResponse<any> = await Axios.post(
@@ -87,9 +87,10 @@ export const fetchNotificationAddUserInTeam = async (
 
 export const fetchApproveUser = async (
   notificationId: string | boolean,
-  approve: boolean
+  approve: boolean,
+  typeNotification: string
 ) => {
-  const model = { notificationId, approve };
+  const model = { notificationId, approve, typeNotification };
 
   try {
     const { data, status }: AxiosResponse<any> = await Axios.post(

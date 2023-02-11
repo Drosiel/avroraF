@@ -17,6 +17,7 @@ const initialState: UserState = {
     teams: [],
     teamsCreator: [],
     notifications: [],
+    friends: [],
   },
 };
 

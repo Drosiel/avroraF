@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
 import Select from "../../../../shared/ui/select";
 import { IUser } from "../../../user/lib/constant";
-import { fetchNotificationAddUserInTeam } from "../../../../services/notifications/notifications";
+import { fetchNotificationUser } from "../../../../services/notifications/notifications";
 
 interface INotificationAddUserInTeamForm {
   user: IUser;
@@ -17,12 +17,14 @@ const NotificationAddUserInTeamForm: FC<INotificationAddUserInTeamForm> = ({
   const initiator = useSelector((state: RootState) => state.user.data);
   const [team, setTeam] = useState<any>({ target: { value: 0 } });
 
+  const typeNotification = "addTeam";
+
   const handleSubmit = (values: any) => {
-    fetchNotificationAddUserInTeam(
+    fetchNotificationUser(
       user.id,
       initiator.id,
-      initiator?.teamsCreator[team.target.value].id,
-      "Приглашает в команду"
+      typeNotification,
+      initiator?.teamsCreator[team.target.value].id
     );
   };
 

@@ -4,20 +4,21 @@ import { useNavigate } from "react-router-dom";
 import { RootState } from "../../../redux/store";
 import { fetchApproveUser } from "../../../services/notifications/notifications";
 import Button from "../../../shared/ui/button";
-import ConfirmForm from "../../../widgets/forms/conformForm";
+import ConfirmForm from "../../../widgets/forms/confirmForm";
 import Modal from "../../../widgets/modal/modal";
 
 const NotificationProfile: FC = () => {
-  const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user.data);
 
   const [open, setOpen] = useState<boolean | string>(false);
   // const [value, setValue] = useState(false);
 
+  const typeNotification = "addFriend";
+
   const notificationConfirm = (value: boolean) => {
     setOpen(false);
     if (open) {
-      fetchApproveUser(open, value);
+      fetchApproveUser(open, value, typeNotification);
     }
   };
 
@@ -35,21 +36,9 @@ const NotificationProfile: FC = () => {
       {user?.notifications.length > 0 && (
         <div className="flex flex-col gap-2">
           {user?.notifications?.map((item) => (
-            <div className="flex items-center pl-2 bg-amber-300">
+            <div key={item.id} className="flex items-center pl-2 bg-amber-300">
               <div className="flex gap-2">
-                <span
-                  className="cursor-pointer"
-                  onClick={() => navigate(`/${item.initiator.id}`)}
-                >
-                  {item.initiator.name}
-                </span>
                 <span>{item.text}</span>
-                <span
-                  className="cursor-pointer"
-                  onClick={() => navigate(`/team/${item.team.id}`)}
-                >
-                  {item.team.name}
-                </span>
               </div>
               <div className="ml-auto">
                 <Button

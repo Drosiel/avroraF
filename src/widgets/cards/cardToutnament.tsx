@@ -9,7 +9,7 @@ import { RootState } from "../../redux/store";
 import { fetchRemoveTournament } from "../../services/tournament/tournament";
 import { fetchRemoveImage } from "../../services/uploadcare/uploadcare";
 import Button from "../../shared/ui/button";
-import ConfirmForm from "../forms/conformForm";
+import ConfirmForm from "../forms/confirmForm";
 import Modal from "../modal/modal";
 
 interface ICardTournament {

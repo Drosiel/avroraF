@@ -29,7 +29,7 @@ const TournamentPage: FC = () => {
       {tournament && (
         <div className="grid gap-4 grid-cols-4">
           {tournament.map((item) => (
-            <CardTournament item={item} />
+            <CardTournament key={item.id} item={item} />
           ))}
         </div>
       )}

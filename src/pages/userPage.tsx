@@ -42,6 +42,7 @@ const UserPage: FC = () => {
               <div className="grid gap-2 grid-cols-5 mt-3 ml-3">
                 {user?.teams.map((team) => (
                   <div
+                    key={team.id}
                     className="cursor-pointer bg-[#4B4B52] p-[2px]"
                     onClick={() => navigate(`/team/${team.id}`)}
                   >

@@ -12,7 +12,7 @@ import Modal from "../widgets/modal/modal";
 import CreateTeamForm from "../features/team/ui/forms/createTeamForm";
 import NotificationProfile from "../features/notification/ui/notificationProfile";
 import { deleteTeamForUser } from "../redux/slices/user/userSlice";
-import ConfirmForm from "../widgets/forms/conformForm";
+import ConfirmForm from "../widgets/forms/confirmForm";
 import { fetchRemoveImage } from "../services/uploadcare/uploadcare";
 
 const ProfilePage: FC = () => {
@@ -84,6 +84,7 @@ const ProfilePage: FC = () => {
               <ul className="grid gap-4 p-2">
                 {user.teams.map((item: ITeam) => (
                   <li
+                    key={item.id}
                     className="flex gap-2 bg-[#29292E] p-2 cursor-pointer flex-1 items-center"
                     onClick={() => navigate(`/team/${item.id}`)}
                   >
@@ -108,7 +109,7 @@ const ProfilePage: FC = () => {
 
               <ul className="grid gap-4 p-2">
                 {user.teamsCreator.map((item: ITeam) => (
-                  <li className="flex">
+                  <li key={item.id} className="flex">
                     <div
                       className="flex gap-2 bg-[#29292E] p-2 cursor-pointer flex-1 items-center"
                       onClick={() => navigate(`/team/${item.id}`)}

@@ -94,6 +94,7 @@ const TournamentByIdPage: FC = () => {
           <ul className="grid grid-cols-4 gap-2">
             {tournamentItem.teams?.map((team) => (
               <li
+                key={team.id}
                 className="flex gap-2 bg-green-300 p-2 cursor-pointer hover:bg-green-200 flex-1 items-center"
                 onClick={() => navigate(`/team/${team.id}`)}
               >
@@ -128,7 +129,7 @@ const TournamentByIdPage: FC = () => {
 
         <ul className="flex gap-4 flex-col-reverse">
           {tournamentItem.comments.map((comment) => (
-            <li className="flex">
+            <li key={comment.id} className="flex">
               <div>
                 {comment?.user?.logoURL && (
                   <img

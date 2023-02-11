@@ -11,6 +11,7 @@ export interface IUser {
   teams: ITeam[];
   teamsCreator: ITeam[];
   notifications: INotification[];
+  friends: IUser[];
 }
 
 export enum ROLE {
