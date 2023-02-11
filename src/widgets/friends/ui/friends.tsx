@@ -1,13 +1,16 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
+import { ReactComponent as AvatarIcon } from "../../..//public/icons/avatar.svg";
+import { useNavigate } from "react-router-dom";
 
 const Friends: FC = () => {
+  const navigate = useNavigate();
   const initiator = useSelector((state: RootState) => state.user.data);
 
   return (
     <div>
-      <div className="p-1">
+      <div className="grid p-1 gap-1">
         {initiator?.friends?.map((friend) => (
           <div
             key={friend.id}
@@ -20,7 +23,18 @@ const Friends: FC = () => {
                 alt="avatarF"
               />
             )}
-            <p>{friend.name}</p>
+
+            {!friend.logoURL && (
+              <div className="w-14 h-14 object-cover rounded-full border">
+                <AvatarIcon />
+              </div>
+            )}
+            <div
+              className="cursor-pointer"
+              onClick={() => navigate(`/${friend.id}`)}
+            >
+              {friend.name}
+            </div>
           </div>
         ))}
       </div>
