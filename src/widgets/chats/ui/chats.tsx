@@ -14,8 +14,6 @@ const Chat: FC<any> = () => {
   const [array, setArray] = useState<IChat[]>([{ name: "", message: "" }]);
   const [value, setValue] = useState("");
 
-  console.log("dataChat", dataValue);
-
   useEffect(() => {
     setArray((prev: any) => [...prev, dataValue]);
   }, [dataValue]);
