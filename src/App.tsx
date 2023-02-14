@@ -20,6 +20,8 @@ import UserPage from "./pages/userPage";
 import SearchPage from "./pages/searchPage";
 import AdminPage from "./pages/adminPage";
 import PublicLayout from "./layouts/publicLayouts/publicLayouts";
+import NewsPage from "./pages/newsPage";
+import NewsByIdPage from "./pages/newsByIdPage";
 
 function App() {
   const value = `; ${document.cookie}`;
@@ -56,6 +58,9 @@ function App() {
         <Route path="/faq" element={<MainPage />} />
 
         <Route path="/about" element={<MainPage />} />
+
+        <Route path="/news" element={<NewsPage />} />
+        <Route path="/news/:newsId" element={<NewsByIdPage />} />
 
         <Route path="/admin" element={<AdminPage />} />
       </Route>

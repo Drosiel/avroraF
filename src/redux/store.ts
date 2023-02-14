@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import newsSlice from "./slices/news/newsSlice";
 import teamSlice from "./slices/teams/teamSlice";
 import tournamentSlice from "./slices/tournaments/tournamentSlice";
 import userSlice from "./slices/user/userSlice";
@@ -8,6 +9,7 @@ export const store = configureStore({
     user: userSlice,
     tournament: tournamentSlice,
     team: teamSlice,
+    news: newsSlice,
   },
 });
 

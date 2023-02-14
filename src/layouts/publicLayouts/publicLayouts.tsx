@@ -16,9 +16,7 @@ const PublicLayout: FC = () => {
           <Friends />
         </div>
 
-        <div className="max-w-screen-xl mx-auto">
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </div>
   );

@@ -6,7 +6,10 @@ import {
 } from "../api/interceptors";
 
 export const Axios = axios.create({
-  baseURL: `https://avrorab-production.up.railway.app`,
+  baseURL:
+    process.env.NODE_ENV === "development"
+      ? `http://localhost:3001`
+      : `https://avrorab-production.up.railway.app`,
 });
 
 Axios.interceptors.request.use(requestInterceptor, responseInterceptorError);

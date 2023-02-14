@@ -6,59 +6,8 @@ import { RootState } from "../../redux/store";
 import { Axios } from "../axios";
 import { getCookie } from "../cookies";
 
-const socket = io("ws://avrorab-production.up.railway.app");
-
 const cookie = `; ${document.cookie}`;
 const token: any = getCookie("token", cookie);
-
-export const Notifications = () => {
-  const [isConnected, setIsConnected] = useState(socket.connected);
-
-  const user = useSelector((state: RootState) => state.user.data);
-
-  useEffect(() => {
-    socket.on("connect", () => {
-      setIsConnected(true);
-    });
-
-    socket.on("disconnect", () => {
-      setIsConnected(false);
-    });
-
-    socket.on("messageToServer", (data) => {
-      console.log("messageToServer", data);
-    });
-
-    socket.on("messageToClient", (data) => {
-      console.log("messageToClient", data);
-    });
-
-    socket.on(user.id, (data) => {
-      console.log("USER", data);
-    });
-
-    return () => {
-      socket.off("connect");
-      socket.off("disconnect");
-      socket.off("messageToServer");
-      socket.off(user.id);
-    };
-  }, [user]);
-
-  const sendPing = () => {
-    socket.emit("messageToServer", {
-      id: "c11326a3-a9d5-4b13-9674-e3ef15fb3ff3",
-    });
-  };
-
-  return (
-    <div>
-      <p>Connected: {"" + isConnected}</p>
-
-      <button onClick={sendPing}>Send ping</button>
-    </div>
-  );
-};
 
 export const fetchNotificationUser = async (
   userId: string,

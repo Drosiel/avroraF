@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { RootState } from "../../../redux/store";
 import { fetchApproveUser } from "../../../services/notifications/notifications";
 import Button from "../../../shared/ui/button";
@@ -11,7 +10,6 @@ const NotificationProfile: FC = () => {
   const user = useSelector((state: RootState) => state.user.data);
 
   const [open, setOpen] = useState<boolean | string>(false);
-  // const [value, setValue] = useState(false);
 
   const typeNotification = "addFriend";
 

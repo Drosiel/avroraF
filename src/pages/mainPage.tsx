@@ -1,7 +1,23 @@
 import { FC } from "react";
+import Chat from "../widgets/chats/ui/chats";
+import NewsList from "../widgets/news/ui/newsList";
 
 const MainPage: FC = () => {
-  return <div className="px-2 py-2 flex gap-4 flex-col">ГЛАВНАЯ</div>;
+  return (
+    <div className="grid w-full grid-cols-[1fr_300px] mt-4">
+      <div className="px-2">
+        <NewsList />
+      </div>
+
+      <div>
+        <div>проходящие матчи</div>
+
+        <Chat />
+
+        <div>4</div>
+      </div>
+    </div>
+  );
 };
 
 export default MainPage;
