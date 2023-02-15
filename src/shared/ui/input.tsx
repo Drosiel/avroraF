@@ -6,6 +6,7 @@ interface IInputComponent {
   value: any;
   type: HTMLInputTypeAttribute;
   handleChange: any;
+  onKeyDown?: any;
 }
 
 const InputComponent: FC<IInputComponent> = ({
@@ -14,6 +15,7 @@ const InputComponent: FC<IInputComponent> = ({
   value,
   type,
   handleChange,
+  onKeyDown,
 }) => {
   return (
     <div className="flex flex-col">
@@ -25,6 +27,7 @@ const InputComponent: FC<IInputComponent> = ({
         value={value}
         onChange={handleChange}
         name={name}
+        onKeyDown={onKeyDown}
       />
     </div>
   );

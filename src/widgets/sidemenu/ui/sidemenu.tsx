@@ -4,7 +4,7 @@ const SideMenu: FC = () => {
   const arr = [1, 2, 3, 4];
 
   return (
-    <div className="w-[66px] min-h-full border-r-2">
+    <div className="border-r-2">
       <div className="grid gap-2">
         {arr.map((item, idx) => (
           <div

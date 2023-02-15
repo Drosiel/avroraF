@@ -1,20 +1,12 @@
 import { FC } from "react";
-import Chat from "../widgets/chats/ui/chats";
+
 import NewsList from "../widgets/news/ui/newsList";
 
 const MainPage: FC = () => {
   return (
-    <div className="grid w-full grid-cols-[1fr_300px] mt-4">
+    <div className="mt-4">
       <div className="px-2">
         <NewsList />
-      </div>
-
-      <div>
-        <div>проходящие матчи</div>
-
-        <Chat />
-
-        <div>4</div>
       </div>
     </div>
   );
