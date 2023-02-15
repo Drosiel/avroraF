@@ -6,7 +6,7 @@ import { RootState } from "../../../redux/store";
 const socket = io(
   process.env.NODE_ENV === "development"
     ? `ws://localhost:3001`
-    : `ws://avrorab-production.up.railway.app`
+    : `wss://avrorab-production.up.railway.app`
 );
 
 export const Notifications = () => {
