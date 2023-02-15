@@ -13,7 +13,7 @@ const Friends: FC = () => {
       {initiator?.friends?.map((friend) => (
         <div
           key={friend.id}
-          className="flex items-center gap-2 py-2 px-4 text-lg bg-[#202025]"
+          className="flex items-center h-max gap-2 py-2 px-4 text-lg bg-[#202025]"
         >
           {friend.logoURL && (
             <img
