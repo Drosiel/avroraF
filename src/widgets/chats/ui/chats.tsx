@@ -14,7 +14,7 @@ const Chat: FC<any> = () => {
   const user = useSelector((state: RootState) => state.user.data);
   const { sendPing, isConnected, dataValue } = Notifications();
 
-  const [array, setArray] = useState<IChat[]>([{ name: "", message: "" }]);
+  const [array, setArray] = useState<IChat[] | any>([]);
   const [value, setValue] = useState("");
 
   const handleClick = () => {
@@ -25,20 +25,29 @@ const Chat: FC<any> = () => {
   };
 
   useEffect(() => {
-    setArray((prev: any) => [...prev, dataValue]);
+    if (dataValue) {
+      setArray((prev: any) => [...prev, dataValue]);
+    }
   }, [dataValue]);
 
   return (
     <div className="bg-[#4B4B52] relative h-full">
       <div className="flex flex-col w-full h-full absolute">
-        <div>поключение: {isConnected ? "онлайн" : "отключен"}</div>
+        <div className="p-2">
+          поключение:{" "}
+          <span
+            className={`${isConnected ? "text-[#9EE800]" : "text-[#FF3D00]"}`}
+          >
+            {isConnected ? "онлайн" : "отключен"}
+          </span>
+        </div>
 
-        <div className="flex flex-col overflow-y-auto overflow-x-hidden">
+        <div className="flex flex-col overflow-y-auto overflow-x-hidden p-2">
           {array.length > 0 && (
             <div>
-              {array.map((item: IChat, idx) => (
-                <div key={idx} className="flex gap-2">
-                  <div className="text-green-800">{item?.name}</div>
+              {array.map((item: IChat, idx: any) => (
+                <div key={idx} className="flex gap-2 text-sm">
+                  <div className="text-[#FA7A02]">{item?.name}:</div>
 
                   <div>{item?.message}</div>
                 </div>
@@ -48,16 +57,19 @@ const Chat: FC<any> = () => {
         </div>
 
         {user.name && (
-          <div className="mt-auto">
+          <div className="grid gap-2 mt-auto p-2">
             <InputComponent
               type="text"
               value={value}
               name="chat"
-              label="введите сообщение"
               handleChange={(e: any) => setValue(e.target.value)}
               onKeyDown={(e: any) => e.key === "Enter" && handleClick()}
+              placeholder="Отправить сообщение"
             />
-            <Button text="отправить" onClick={handleClick} />
+
+            <div>
+              <Button text="отправить" onClick={handleClick} />
+            </div>
           </div>
         )}
       </div>

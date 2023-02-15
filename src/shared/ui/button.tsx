@@ -34,7 +34,7 @@ const Button: FC<IButton> = ({
 
   return (
     <button
-      className={`rounded uppercase px-4 py-2 border-2 ${setTypeButton()}`}
+      className={`rounded uppercase px-4 py-2 border-2 ${setTypeButton()} w-full`}
       type={type}
       onClick={onClick}
     >

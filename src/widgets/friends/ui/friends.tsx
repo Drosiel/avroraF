@@ -10,11 +10,11 @@ const Friends: FC = () => {
 
   return (
     <div className="bg-[#4B4B52]">
-      <div className="grid gap-2">
+      <div className="grid gap-1 p-1">
         {initiator?.friends?.map((friend) => (
           <div
             key={friend.id}
-            className="flex items-center gap-2 py-2 px-4 text-lg bg-[#202025]"
+            className="flex items-center gap-4 py-2 px-2 text-lg bg-[#202025]"
           >
             {friend.logoURL && (
               <img
