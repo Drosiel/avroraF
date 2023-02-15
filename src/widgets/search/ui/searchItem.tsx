@@ -8,6 +8,9 @@ const SearchItem: FC<any> = ({ title, handleClick, searchArray, isUsers }) => {
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user.data);
 
+  console.log("user", user);
+  console.log("searchArray", searchArray);
+
   return (
     <div className="flex flex-col">
       <div className="text-lg">{title}</div>
@@ -41,7 +44,8 @@ const SearchItem: FC<any> = ({ title, handleClick, searchArray, isUsers }) => {
             </div>
 
             {isUsers &&
-              user?.friends?.find((friend) => friend.id !== item.id) && (
+              (user?.friends?.find((friend) => friend.id !== item.id) ||
+                user.friends.length === 0) && (
                 <button
                   className="w-4 h-4 absolute cursor-pointer top-1 left-1 rounded-full bg-[#FA7A02] hover:bg-[#673F1D]"
                   onClick={() => handleClick(item)}

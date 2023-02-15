@@ -1,4 +1,6 @@
 import { FC, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 import Button from "../../../shared/ui/button";
 import InputComponent from "../../../shared/ui/input";
 import { Notifications } from "../lib/helpers";
@@ -9,6 +11,7 @@ interface IChat {
 }
 
 const Chat: FC<any> = () => {
+  const user = useSelector((state: RootState) => state.user.data);
   const { sendPing, isConnected, dataValue } = Notifications();
 
   const [array, setArray] = useState<IChat[]>([{ name: "", message: "" }]);
@@ -44,17 +47,19 @@ const Chat: FC<any> = () => {
           )}
         </div>
 
-        <div className="mt-auto">
-          <InputComponent
-            type="text"
-            value={value}
-            name="chat"
-            label="введите сообщение"
-            handleChange={(e: any) => setValue(e.target.value)}
-            onKeyDown={(e: any) => e.key === "Enter" && handleClick()}
-          />
-          <Button text="отправить" onClick={handleClick} />
-        </div>
+        {user.name && (
+          <div className="mt-auto">
+            <InputComponent
+              type="text"
+              value={value}
+              name="chat"
+              label="введите сообщение"
+              handleChange={(e: any) => setValue(e.target.value)}
+              onKeyDown={(e: any) => e.key === "Enter" && handleClick()}
+            />
+            <Button text="отправить" onClick={handleClick} />
+          </div>
+        )}
       </div>
     </div>
   );
