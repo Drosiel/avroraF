@@ -60,7 +60,7 @@ const TournamentByIdPage: FC = () => {
   }, [tournamentId]);
 
   return (
-    <div className="w-full grid gap-4 pt-5">
+    <div className="w-full grid gap-4">
       <div className="grid gap-2">
         <div className="text-3xl">{tournamentItem?.name}</div>
 

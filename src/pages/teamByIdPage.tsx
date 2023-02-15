@@ -35,7 +35,7 @@ const TeamByIdPage: FC = () => {
   }, [teamId]);
 
   return (
-    <div className="px-2 py-2 flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <div className="flex gap-4">
         <div>
           {value.logoURL && (

@@ -15,7 +15,7 @@ const TournamentPage: FC = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="px-2 py-2 flex gap-4 flex-col">
+    <div className="flex gap-4 flex-col">
       {user.roles?.some((role) => role.name === ROLE.ADMIN) && (
         <div>
           <Button

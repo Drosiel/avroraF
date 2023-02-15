@@ -15,7 +15,9 @@ const PublicLayout: FC = () => {
 
         <Friends />
 
-        <Outlet />
+        <div className="px-2 pt-2">
+          <Outlet />
+        </div>
 
         <Chat />
       </div>

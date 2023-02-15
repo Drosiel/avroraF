@@ -10,6 +10,12 @@ const Friends: FC = () => {
 
   return (
     <div className="bg-[#4B4B52]">
+      <div>
+        <p className="uppercase p-2 text-xl font-bold text-[#9EE800]">
+          Мои друзья
+        </p>
+      </div>
+
       <div className="grid gap-1 p-1">
         {initiator?.friends?.map((friend) => (
           <div

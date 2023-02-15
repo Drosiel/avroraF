@@ -20,7 +20,7 @@ const UserPage: FC = () => {
   }, [userId]);
 
   return (
-    <div className="pt-5">
+    <div>
       <div className="flex gap-4">
         {user?.logoURL && (
           <img className="w-40 h-40" src={user?.logoURL} alt="avatar" />

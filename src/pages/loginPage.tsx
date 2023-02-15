@@ -6,7 +6,7 @@ const LoginPage: FC = () => {
   const [value, setValue] = useState(false);
 
   return (
-    <div className="flex justify-center py-6">
+    <div className="flex justify-center">
       <div className="flex flex-col w-96 gap-4">
         <div>
           {value ? (
