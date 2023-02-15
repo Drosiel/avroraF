@@ -8,9 +8,6 @@ const SearchItem: FC<any> = ({ title, handleClick, searchArray, isUsers }) => {
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user.data);
 
-  console.log("user", user);
-  console.log("searchArray", searchArray);
-
   return (
     <div className="flex flex-col">
       <div className="text-lg">{title}</div>
